@@ -1,15 +1,15 @@
 # Prova Final ReactJS
-O último teste do módulo de React consiste em criar todas as páginas seguindo este protótipo
-(Protótipo)[https://xd.adobe.com/view/4bd3fba7-f671-4202-b5e2-17137367ef1d-1e80/specs/]
+O último teste do módulo de React consiste em criar todas as páginas seguindo este protótipo.
+[Protótipo](https://xd.adobe.com/view/4bd3fba7-f671-4202-b5e2-17137367ef1d-1e80/specs/)
 
 Atenção: para o desenvolvimento dessa prova, vamos praticar a integração com APIs.
 
-Para que isso seja possível, você deverá acessar este repositório e seguir os passos documentados no README.md do projeto! (Caso tenha dificuldades na clonagem do repositório, notifique seu líder)
-(Link da API)[https://github.com/lubysoftware/LAB_TGL_API#readme]
+Para que isso seja possível, você deverá acessar este repositório e seguir os passos documentados no README.md do projeto! (Caso tenha dificuldades na clonagem do repositório, notifique seu líder).
+[Link da API](https://github.com/lubysoftware/LAB_TGL_API#readme)
 
 Para ajudar quem nunca teve contato com requisições, fizemos um vídeo introdutório para auxiliar vocês e acelerar o processo de integração.
-Para auxiliá-los na integração assistam esse vídeo
-(video)[https://www.youtube.com/watch?v=Ftrye8waEsM]
+Para auxiliá-los na integração assistam esse vídeo.
+[video](https://www.youtube.com/watch?v=Ftrye8waEsM)
 
 ## Requisitos Não Funcionais
 - RNF01. Construir toda aplicação utilizando React (Hooks), StyledComponent e Redux.
