@@ -5,9 +5,13 @@ export const HeaderContainer = styled.header`
   padding: .7rem 8.8rem 0.4rem;
   border-bottom: 2px solid ${props => props.theme.gray200};
 
-  display: flex;
-  align-items: center;
-  gap: 4.5rem;
+  & > div{
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+  }
 `;
 
 export const Logo  = styled.h1`

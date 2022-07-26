@@ -1,6 +1,6 @@
 import { NumbersBtn } from '@components/Buttons/NumbersBtn';
 import { ShoppingCartSimple } from 'phosphor-react';
-import { AddToCart, BetButton, BetContainer, BetNumbers, BetPageContainer, ChooseAGame, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
+import { AddToCart, BetButton, BetContainer, BetNumbers, BetPageContainer, CartContainer, ChooseAGame, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
 
 export function Bet(){
 	function createNumbers(){
@@ -62,9 +62,9 @@ export function Bet(){
 				</FooterButtons>
 			</BetContainer>
 
-			<aside>
+			<CartContainer>
 				<h2>Cart</h2>
-			</aside>
+			</CartContainer>
 		</BetPageContainer>
 	);
 }

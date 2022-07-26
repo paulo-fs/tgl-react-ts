@@ -3,14 +3,18 @@ import styled from 'styled-components';
 export const BetPageContainer = styled.div`
   width: 100%;
   height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
+  gap:  2.5rem;
+  justify-content: space-between;
 `;
 
 export const BetContainer = styled.div`
   max-width: 46rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 `;
 
 export const HeaderContainer = styled.header`
@@ -55,7 +59,7 @@ export const BetNumbers = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
 `;
 
 export const FooterButtons = styled.div`
@@ -99,4 +103,10 @@ export const AddToCart = styled(BaseButton)`
   &:hover{
     opacity: .75;
   }
+`;
+
+export const CartContainer = styled.aside`
+  flex: 1;
+  min-width: 19rem;
+  max-width: 25rem;
 `;
