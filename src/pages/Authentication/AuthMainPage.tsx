@@ -1,4 +1,6 @@
 import { Authentication } from './components/Authentication';
+import { Registration } from './components/Registration';
+import { ResetPass } from './components/ResetPass';
 import { LoginContainer } from './stylesLogin';
 
 export function AuthMainPage(){
@@ -13,7 +15,9 @@ export function AuthMainPage(){
 			</header>
 
 			<main>
-				<Authentication />
+				{/* <Authentication /> */}
+				{/* <ResetPass /> */}
+				<Registration />
 			</main>
 		</LoginContainer>
 	);

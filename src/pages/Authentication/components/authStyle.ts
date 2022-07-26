@@ -36,6 +36,7 @@ export const AuthContainer = styled.div`
 `;
 
 export const InputContainer = styled.div`
+  width: 100%;
   padding: 1.7rem 2rem;
   border-bottom: 1px solid ${props => props.theme.gray200};
 
