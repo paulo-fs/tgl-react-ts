@@ -15,9 +15,9 @@ export function AuthMainPage(){
 			</header>
 
 			<main>
-				{/* <Authentication /> */}
+				<Authentication />
 				{/* <ResetPass /> */}
-				<Registration />
+				{/* <Registration /> */}
 			</main>
 		</LoginContainer>
 	);
