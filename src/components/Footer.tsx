@@ -16,10 +16,6 @@ const FooterContainer = styled.footer`
   text-align: center;
   border-top: 2px solid ${props => props.theme.gray200};
 
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
   p{
     font-style: normal;
     font-size: 0.85rem;
