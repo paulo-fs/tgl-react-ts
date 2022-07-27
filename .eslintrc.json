@@ -39,6 +39,7 @@
         ],
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/no-empty-interface": "off",
-        "no-mixed-spaces-and-tabs": "off"
+        "no-mixed-spaces-and-tabs": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }

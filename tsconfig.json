@@ -22,7 +22,9 @@
       "@pages/*" : ["src/pages/*"],
       "@store/*" : ["src/store/*"],
       "@styles/*" : ["src/styles/*"],
-      "@layouts/*" : ["src/layouts/*"]
+      "@layouts/*" : ["src/layouts/*"],
+      "@interfaces/*" : ["src/shared/interfaces/*"],
+      "@services/*" : ["src/shared/services/*"]
     }
   },
   "include": ["src"],

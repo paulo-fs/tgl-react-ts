@@ -12,7 +12,9 @@ export default defineConfig({
 			'@pages' : path.resolve(__dirname, './src/pages'),
 			'@store' : path.resolve(__dirname, './src/store'),
 			'@styles' : path.resolve(__dirname, './src/styles'),
-			'@layouts' : path.resolve(__dirname, './src/layouts')
+			'@layouts' : path.resolve(__dirname, './src/layouts'),
+			'@interfaces' : path.resolve(__dirname, './src/shared/interfaces'),
+			'@services' : path.resolve(__dirname, '.src/shared/services')
 		}
 	},
 	plugins: [react()]
