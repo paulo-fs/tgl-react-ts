@@ -22,11 +22,13 @@ export const AuthContainer = styled.div`
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  a{
+  .forgotPass{
     width: 100%;
     padding: 1.5rem 1.8rem;
     text-align: right;
     color: ${props => props.theme.gray300};
+    border: none;
+    background-color: transparent;
 
     transition: .2s;
     &:hover{

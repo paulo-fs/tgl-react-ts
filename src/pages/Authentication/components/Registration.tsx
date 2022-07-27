@@ -2,8 +2,16 @@ import { AuthContainer, InputContainer } from './authStyle';
 import { ArrowLeft, ArrowRight } from 'phosphor-react';
 import { AuthPrimaryBtn } from '@components/Buttons/AuthPrimaryBtn';
 import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
+import { useAppDispatch } from '@store/store';
+import { AuthComponentType, uiAuthActions } from '@store/slices/uiAuthSlice';
 
 export function Registration(){
+	const dispatch = useAppDispatch();
+
+	function callAuthComponent(){
+		dispatch(uiAuthActions.toggleComponent(AuthComponentType.LOGIN_COMPONENT));
+	}
+
 	return (
 		<AuthContainer>
 			<h3>Registration</h3>
@@ -22,7 +30,7 @@ export function Registration(){
 					<ArrowRight size={28} color='#B5C401' />
 				</AuthPrimaryBtn>
 			</form>
-			<AuthSecBtn>
+			<AuthSecBtn onClick={callAuthComponent}>
 				<ArrowLeft size={28} />
         Back
 			</AuthSecBtn>
