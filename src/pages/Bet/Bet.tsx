@@ -1,6 +1,8 @@
+import { BetButton } from '@components/Buttons/BetButton';
 import { NumbersBtn } from '@components/Buttons/NumbersBtn';
-import { ArrowRight, ShoppingCartSimple, Trash } from 'phosphor-react';
-import { AddToCart, BetButton, BetContainer, BetNumbers, BetPageContainer, CartContainer, CartContent, CartFooter, CartItem, ChooseAGame, DeleteBtn, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
+import { ShoppingCartSimple } from 'phosphor-react';
+import { AddToCart, BetContainer, BetNumbers, BetPageContainer, ChooseAGame, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
+import { CartComponent } from './components/CartComponent';
 
 export function Bet(){
 	function createNumbers(){
@@ -62,47 +64,7 @@ export function Bet(){
 				</FooterButtons>
 			</BetContainer>
 
-			<CartContainer>
-				<CartContent>
-				  <h2>Cart</h2>
-					<div className='cartContent'>
-						<CartItem>
-							<DeleteBtn>
-							  <Trash size={24} />
-							</DeleteBtn>
-							<div className='cartInfos'>
-								<p>
-                  01, 02, 04, 05, 06, 07, 09, 15, 17, 20, 21, 22, 23, 24, 25
-								</p>
-								<h4>Lotofácil <span>R$2,50</span></h4>
-							</div>
-						</CartItem>
-						<CartItem>
-							<DeleteBtn>
-							  <Trash size={24} />
-							</DeleteBtn>
-							<div className='cartInfos'>
-								<p>
-                  01, 02, 04, 05, 06, 07, 09, 15, 17, 20, 21, 22, 23, 24, 25
-								</p>
-								<h4>Lotofácil <span>R$2,50</span></h4>
-							</div>
-						</CartItem>
-					</div>
-				</CartContent>
-
-				<CartFooter>
-					<p>
-            Cart <span>Total: R$7,00</span>
-					</p>
-					<div>
-						<button>
-              Save
-							<ArrowRight color='#27C383'/>
-						</button>
-					</div>
-				</CartFooter>
-			</CartContainer>
+			<CartComponent />
 		</BetPageContainer>
 	);
 }
