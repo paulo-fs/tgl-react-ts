@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
-  padding: 9.8rem 9.75rem;
+  padding: 9.8rem 9.75rem 0;
   display: flex;
   justify-content: space-between;
 
