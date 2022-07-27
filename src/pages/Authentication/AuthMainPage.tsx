@@ -34,9 +34,6 @@ export function AuthMainPage(){
 
 			<main>
 				{switchAuthComponent()}
-				{/* <Authentication /> */}
-				{/* <ResetPass /> */}
-				{/* <Registration /> */}
 			</main>
 		</LoginContainer>
 	);

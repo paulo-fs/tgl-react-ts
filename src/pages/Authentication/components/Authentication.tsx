@@ -4,13 +4,16 @@ import { AuthPrimaryBtn } from '@components/Buttons/AuthPrimaryBtn';
 import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
 import { useAppDispatch } from '@store/store';
 import { AuthComponentType, uiAuthActions } from '@store/slices/uiAuthSlice';
+import { useNavigate } from 'react-router-dom';
 // import { authServices } from 'src/shared/services';
 
 export function Authentication(){
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	// const { login } = authServices();
 
-	// async function submitHandler() {
+	async function submitHandler() {
+		navigate('/bet');
 	// 	try{
 	// 		const resLogin = await login({ email, password });
 	// 	} catch(error: any){
@@ -18,7 +21,7 @@ export function Authentication(){
 	// 			alert('Authentication failed!');
 	// 		}
 	// 	}
-	// }
+	}
 
 	function callRegisterComponent(){
 		dispatch(uiAuthActions.toggleComponent(AuthComponentType.REGISTER_COMPONENT));
@@ -31,7 +34,7 @@ export function Authentication(){
 	return (
 		<AuthContainer>
 			<h3>Authentication</h3>
-			<form>
+			<form onSubmit={submitHandler}>
 				<InputContainer>
   				<input type="email" name="email" id="email" placeholder="Email"/>
 				</InputContainer>
