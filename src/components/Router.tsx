@@ -3,6 +3,7 @@ import { LayoutAuth } from '@layouts/LayoutAuth';
 import { AuthMainPage } from '@pages/Authentication/AuthMainPage';
 import { LayoutGames } from '@layouts/LayoutGames';
 import { Bet } from '@pages/Bet/Bet';
+import { BetHistory } from '@pages/BetHistory/BetHistory';
 
 export function Router(){
 	return(
@@ -12,7 +13,7 @@ export function Router(){
 			</Route>
 			<Route path='/bet' element={<LayoutGames />}>
 				<Route path='/bet' element={<Bet />} />
-				<Route path='/bet/history' element={''} />
+				<Route path='/bet/history' element={<BetHistory />} />
 			</Route>
 		</Routes>
 	);
