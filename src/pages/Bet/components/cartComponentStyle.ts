@@ -5,10 +5,14 @@ flex: 1;
 min-width: 19rem;
 max-width: 25rem;
 max-height: 40rem;
+height: fit-content;
 
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+
+position: sticky;
+top: 6.5rem;
 
 background-color: ${props => props.theme.white};
 border: 2px solid ${props => props.theme.gray200};
@@ -17,6 +21,7 @@ border-radius: 10px;
 
 export const CartContent = styled.div`
 padding: 2rem 1.4rem;
+overflow-y: auto;
 
 h2{
   font-size: 1.5rem;

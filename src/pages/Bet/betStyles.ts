@@ -36,6 +36,7 @@ export const ChooseAGame = styled.div`
 
   nav{
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
 `;
@@ -50,6 +51,8 @@ export const BetNumbers = styled.div`
 
 export const FooterButtons = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: space-between;
 
   div{
