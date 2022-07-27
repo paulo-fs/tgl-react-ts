@@ -8,6 +8,11 @@ export interface ILoginResponse {
   token: Token;
 }
 
+export interface IAuth{
+  login: ({email, password}: IBodyAuth) => Promise<ILoginResponse>
+}
+
+
 interface Token {
   type:       string;
   token:      string;

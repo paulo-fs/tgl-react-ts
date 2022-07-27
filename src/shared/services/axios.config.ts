@@ -14,8 +14,10 @@ instance.interceptors.request.use(async (config) => {
 		config.headers!.Authorization = 'Bearer' + isToken;
 	}
 	return config;
-}, function(error){
-	console.log('erro na request', error);
+}, function(error: AxiosError){
+	if(error.response){
+		return Promise.reject(error.response);
+	}
 	return Promise.reject(error);
 });
 
