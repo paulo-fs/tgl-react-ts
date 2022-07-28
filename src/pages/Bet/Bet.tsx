@@ -18,7 +18,7 @@ export function Bet(){
 	const gamesInfo = useSelector<RootState>(state => state.gamesInfo.gamesInfo);
 	const selectedGame = useSelector<RootState>(state => state.gamesInfo.selectedGame);
 
-	useEffect(() => {
+ 	useEffect(() => {
 		getGamesData()
 			.then(response => {
 				dispatch(gamesInfoActions.storeGamesInfo(response.types));
@@ -30,7 +30,7 @@ export function Bet(){
 	}
 
 	function createNumbers(){
-		const totalNumbers = selectedGame.range;
+		const totalNumbers = selectedGame?.range;
 		const gameNumber: number[] = [];
 		for(let i = 1; i <= totalNumbers; i++){
 			gameNumber.push(i);
@@ -43,7 +43,7 @@ export function Bet(){
 			<BetContainer>
 				<HeaderContainer>
 					<h1>
-            New Bet <span>for {selectedGame.type}</span>
+            New Bet <span>for {selectedGame?.type}</span>
 					</h1>
 				</HeaderContainer>
 
@@ -51,9 +51,12 @@ export function Bet(){
 					<h2>Choose a game</h2>
 					<nav>
 						{gamesInfo.map((game: GamesDataTypes) => {
+							const selected = (game.id === selectedGame.id);
 							return (
 								<BetButton
 									key={game.id}
+									color={game.color}
+									isSelected={selected}
 									onClick={() => selectGameHandler(game.id)}
 								>{game.type}</BetButton>
 							);
