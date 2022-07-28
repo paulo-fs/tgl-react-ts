@@ -7,7 +7,7 @@ export interface IGameResponse {
   types:          GamesDataTypes[];
 }
 
-interface GamesDataTypes {
+export interface GamesDataTypes {
   id:          number;
   type:        string;
   description: string;

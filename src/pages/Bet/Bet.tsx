@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { BetButton } from '@components/Buttons/BetButton';
 import { NumbersBtn } from '@components/Buttons/NumbersBtn';
@@ -7,10 +7,22 @@ import { CartComponent } from './components/CartComponent';
 import { AddToCart, BetContainer, BetNumbers, BetPageContainer, ChooseAGame, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
 import { ShoppingCartSimple } from 'phosphor-react';
 import { gamesServices } from '../../shared/services/Games/gamesServices';
+import { RootState, useAppDispatch } from '@store/store';
+import { gamesInfoActions } from '@store/slices/gamesSlice';
+import { useSelector } from 'react-redux';
+import { GamesDataTypes } from '@interfaces/gamesServicesInterface';
 
 export function Bet(){
-	// const [] = useState([]);
 	const { getGamesData } = gamesServices();
+	const dispatch = useAppDispatch();
+	const gamesInfo = useSelector<RootState>(state => state.gamesInfo.gamesInfo);
+
+	useEffect(() => {
+		getGamesData()
+			.then(response => {
+				dispatch(gamesInfoActions.storeGamesInfo(response.types));
+			});
+	}, []);
 
 	function createNumbers(){
 		const arr: number[] = [];
@@ -20,10 +32,6 @@ export function Bet(){
 		return arr;
 	}
 
-	useEffect(() => {
-		getGamesData()
-			.then(response => console.log(response));
-	}, []);
 
 
 	return(
@@ -38,9 +46,11 @@ export function Bet(){
 				<ChooseAGame>
 					<h2>Choose a game</h2>
 					<nav>
-						<BetButton>Lotofácil</BetButton>
-						<BetButton>Mega-Sena</BetButton>
-						<BetButton>Lotomania</BetButton>
+						{gamesInfo.map((game: GamesDataTypes) => {
+							return (
+								<BetButton key={game.id}>{game.type}</BetButton>
+							);
+						})}
 					</nav>
 				</ChooseAGame>
 
