@@ -13,7 +13,6 @@ export default defineConfig({
 			'@styles' : path.resolve(__dirname, './src/styles'),
 			'@layouts' : path.resolve(__dirname, './src/layouts'),
 			'@interfaces' : path.resolve(__dirname, './src/shared/interfaces'),
-			'@services' : path.resolve(__dirname, '.src/shared/services'),
 			'@store' : path.resolve(__dirname, './src/shared/store')
 		}
 	},

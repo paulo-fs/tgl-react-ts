@@ -1,10 +1,17 @@
+import { useEffect, useState } from 'react';
+
 import { BetButton } from '@components/Buttons/BetButton';
 import { NumbersBtn } from '@components/Buttons/NumbersBtn';
-import { ShoppingCartSimple } from 'phosphor-react';
-import { AddToCart, BetContainer, BetNumbers, BetPageContainer, ChooseAGame, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
 import { CartComponent } from './components/CartComponent';
 
+import { AddToCart, BetContainer, BetNumbers, BetPageContainer, ChooseAGame, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
+import { ShoppingCartSimple } from 'phosphor-react';
+import { gamesServices } from '../../shared/services/Games/gamesServices';
+
 export function Bet(){
+	// const [] = useState([]);
+	const { getGamesData } = gamesServices();
+
 	function createNumbers(){
 		const arr: number[] = [];
 		for(let i = 1; i <= 40; i++){
@@ -12,6 +19,12 @@ export function Bet(){
 		}
 		return arr;
 	}
+
+	useEffect(() => {
+		getGamesData()
+			.then(response => console.log(response));
+	}, []);
+
 
 	return(
 		<BetPageContainer>

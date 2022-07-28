@@ -1,14 +1,14 @@
 import axios, { AxiosError } from 'axios';
 
-const instance = axios.create({
-	baseURL: 'http://localhots:3333',
+const api = axios.create({
+	baseURL: 'http://localhost:3333',
 	headers: {
 		'Content-Type': 'application/json',
 		Accpect: 'application/json',
 	},
 });
 
-instance.interceptors.request.use(async (config) => {
+api.interceptors.request.use(async (config) => {
 	const isToken = false;
 	if(isToken){
 		config.headers!.Authorization = 'Bearer' + isToken;
@@ -21,9 +21,9 @@ instance.interceptors.request.use(async (config) => {
 	return Promise.reject(error);
 });
 
-instance.interceptors.response.use(
+api.interceptors.response.use(
 	async (response) => {
-		return response;
+		return response.data;
 	},
 	function(error: AxiosError){
 		if(error.response){
@@ -32,4 +32,4 @@ instance.interceptors.response.use(
 		return Promise.reject(error);
 	});
 
-export default instance;
+export default api;

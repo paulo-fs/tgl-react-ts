@@ -5,22 +5,14 @@ import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
 import { useAppDispatch } from '@store/store';
 import { AuthComponentType, uiAuthActions } from '@store/slices/uiAuthSlice';
 import { useNavigate } from 'react-router-dom';
-// import { authServices } from 'src/shared/services';
 
 export function Authentication(){
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	// const { login } = authServices();
 
 	async function submitHandler() {
-		navigate('/bet');
-	// 	try{
-	// 		const resLogin = await login({ email, password });
-	// 	} catch(error: any){
-	// 		if(error.status === 401){
-	// 			alert('Authentication failed!');
-	// 		}
-	// 	}
+		// navigate('/bet');
+
 	}
 
 	function callRegisterComponent(){
