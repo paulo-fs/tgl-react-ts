@@ -16,30 +16,34 @@ export function Bet(){
 	const { getGamesData } = gamesServices();
 	const dispatch = useAppDispatch();
 	const gamesInfo = useSelector<RootState>(state => state.gamesInfo.gamesInfo);
+	const selectedGame = useSelector<RootState>(state => state.gamesInfo.selectedGame);
 
 	useEffect(() => {
 		getGamesData()
 			.then(response => {
 				dispatch(gamesInfoActions.storeGamesInfo(response.types));
 			});
-	}, []);
+	}, [getGamesData]);
 
-	function createNumbers(){
-		const arr: number[] = [];
-		for(let i = 1; i <= 40; i++){
-			arr.push(i);
-		}
-		return arr;
+	function selectGameHandler(id: number){
+		dispatch(gamesInfoActions.selectGame(id));
 	}
 
-
+	function createNumbers(){
+		const totalNumbers = selectedGame.range;
+		const gameNumber: number[] = [];
+		for(let i = 1; i <= totalNumbers; i++){
+			gameNumber.push(i);
+		}
+		return gameNumber;
+	}
 
 	return(
 		<BetPageContainer>
 			<BetContainer>
 				<HeaderContainer>
 					<h1>
-            New Bet <span>for Mega-Sena</span>
+            New Bet <span>for {selectedGame.type}</span>
 					</h1>
 				</HeaderContainer>
 
@@ -48,7 +52,10 @@ export function Bet(){
 					<nav>
 						{gamesInfo.map((game: GamesDataTypes) => {
 							return (
-								<BetButton key={game.id}>{game.type}</BetButton>
+								<BetButton
+									key={game.id}
+									onClick={() => selectGameHandler(game.id)}
+								>{game.type}</BetButton>
 							);
 						})}
 					</nav>
@@ -58,7 +65,7 @@ export function Bet(){
 					<div>
 						<h3>Fill your bet</h3>
 						<p>
-              Fill your bet Mark as many numbers as you want up to a maximum of 50. Win by hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
+							{selectedGame?.description}
 						</p>
 					</div>
 

@@ -8,7 +8,7 @@ interface IinitState {
 
 const initState: IinitState = {
 	gamesInfo: [],
-	selectedGame: null
+	selectedGame: null,
 };
 
 const gamesSlice = createSlice({
@@ -17,9 +17,12 @@ const gamesSlice = createSlice({
 	reducers: {
 		storeGamesInfo(state, action: PayloadAction<GamesDataTypes[]>){
 			state.gamesInfo = action.payload;
+			if(state.selectedGame === null)
+			  state.selectedGame = state.gamesInfo[0];
 		},
 		selectGame(state, action: PayloadAction<number>){
-			state.selectedGame = state.gamesInfo[action.payload];
+			const id = action.payload;
+  	  state.selectedGame = state.gamesInfo[id -1];
 		}
 	}
 });
