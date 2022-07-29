@@ -1,11 +1,14 @@
-import { NumbersBtn } from '@components/Buttons/NumbersBtn';
-import { RootState } from '@store/store';
+// import { NumbersBtn } from '@components/Buttons/NumbersBtn';
+import { gamesInfoActions } from '@store/slices/gamesSlice';
+import { RootState, useAppDispatch } from '@store/store';
 import { useSelector } from 'react-redux';
-import { BetNumbers } from './betNumbersComponentStyles';
+import { BetNumbers, BtnNumber } from './betNumbersComponentStyles';
 
 export function BetNumbersComponent(){
-	const gamesInfo = useSelector<RootState>(state => state.gamesInfo.gamesInfo);
-	const selectedGame = useSelector<RootState>(state => state.gamesInfo.selectedGame);
+	// const gamesInfo = useSelector<RootState>(state => state.gamesInfo.gamesInfo);
+	// const selectedGame = useSelector<RootState>(state => state.gamesInfo.selectedGame);
+	const dispatch = useAppDispatch();
+	const { selectedGame, selectedNumbers } = useSelector<RootState>(state => state.gamesInfo);
 
 	function createNumbers(){
 		const totalNumbers = selectedGame?.range;
@@ -16,14 +19,20 @@ export function BetNumbersComponent(){
 		return gameNumber;
 	}
 
+	function selectNumberHandler(i: number){
+		dispatch(gamesInfoActions.selectTheNumber(i));
+	}
+
 	return (
 		<BetNumbers>
 			{
 				createNumbers().map(i => {
+					const content = i < 10 ? '0'+String(i) : String(i);
+					const selected = selectedNumbers.includes(i);
 					return (
-						<NumbersBtn key={i}>
-							{i < 10 ? '0'+String(i) : String(i)}
-						</NumbersBtn>
+						<BtnNumber key={i} isSelected={selected} onClick={() => selectNumberHandler(i)}>
+							{content}
+						</BtnNumber>
 					);
 				})
 			}
