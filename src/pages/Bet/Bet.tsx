@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 
 import { BetButton } from '@components/Buttons/BetButton';
-import { NumbersBtn } from '@components/Buttons/NumbersBtn';
 import { CartComponent } from './components/CartComponent';
+import { FooterButtonsComponent } from './components/FooterButtonsComponent';
+import { BetNumbersComponent } from './components/BetNumbersComponent';
 
-import { AddToCart, BetContainer, BetNumbers, BetPageContainer, ChooseAGame, FooterButtons, HeaderContainer, SecBtn } from './betStyles';
-import { ShoppingCartSimple } from 'phosphor-react';
+import { BetContainer, BetPageContainer, ChooseAGame, HeaderContainer } from './betStyles';
 import { gamesServices } from '../../shared/services/Games/gamesServices';
+
 import { RootState, useAppDispatch } from '@store/store';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
 import { useSelector } from 'react-redux';
@@ -27,15 +28,6 @@ export function Bet(){
 
 	function selectGameHandler(id: number){
 		dispatch(gamesInfoActions.selectGame(id));
-	}
-
-	function createNumbers(){
-		const totalNumbers = selectedGame?.range;
-		const gameNumber: number[] = [];
-		for(let i = 1; i <= totalNumbers; i++){
-			gameNumber.push(i);
-		}
-		return gameNumber;
 	}
 
 	return(
@@ -72,29 +64,10 @@ export function Bet(){
 						</p>
 					</div>
 
-					<BetNumbers>
-						{
-							createNumbers().map(i => {
-								return (
-									<NumbersBtn key={i}>
-										{i < 10 ? '0'+String(i) : String(i)}
-									</NumbersBtn>
-								);
-							})
-						}
-					</BetNumbers>
+					<BetNumbersComponent />
 				</main>
 
-				<FooterButtons>
-					<div>
-						<SecBtn>Complete game</SecBtn>
-						<SecBtn>Clear game</SecBtn>
-					</div>
-					<AddToCart>
-						<ShoppingCartSimple size={24} color="#fff" />
-            Add to cart
-					</AddToCart>
-				</FooterButtons>
+				<FooterButtonsComponent />
 			</BetContainer>
 
 			<CartComponent />
