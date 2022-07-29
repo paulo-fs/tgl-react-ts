@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface StatusProp {
+  isSelected: boolean
+}
+
 export const BetNumbers = styled.div`
 width: 100%;
 display: flex;
@@ -8,9 +12,7 @@ gap: 1rem;
 margin: 1rem 0;
 `;
 
-interface StatusProp {
-  isSelected: boolean
-}
+
 
 export const BtnNumber = styled.button<StatusProp>`
   padding: 1.25rem;

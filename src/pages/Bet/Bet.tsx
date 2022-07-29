@@ -16,8 +16,8 @@ import { GamesDataTypes } from '@interfaces/gamesServicesInterface';
 export function Bet(){
 	const { getGamesData } = gamesServices();
 	const dispatch = useAppDispatch();
-	const gamesInfo = useSelector<RootState>(state => state.gamesInfo.gamesInfo);
-	const selectedGame = useSelector<RootState>(state => state.gamesInfo.selectedGame);
+
+	const { gamesInfo, selectedGame } = useSelector((state: RootState) => state.gamesInfo);
 
  	useEffect(() => {
 		getGamesData()
@@ -43,7 +43,7 @@ export function Bet(){
 					<h2>Choose a game</h2>
 					<nav>
 						{gamesInfo.map((game: GamesDataTypes) => {
-							const selected = (game.id === selectedGame.id);
+							const selected = (game.id === selectedGame!.id);
 							return (
 								<BetButton
 									key={game.id}

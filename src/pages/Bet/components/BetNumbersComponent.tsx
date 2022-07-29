@@ -5,15 +5,13 @@ import { useSelector } from 'react-redux';
 import { BetNumbers, BtnNumber } from './betNumbersComponentStyles';
 
 export function BetNumbersComponent(){
-	// const gamesInfo = useSelector<RootState>(state => state.gamesInfo.gamesInfo);
-	// const selectedGame = useSelector<RootState>(state => state.gamesInfo.selectedGame);
 	const dispatch = useAppDispatch();
-	const { selectedGame, selectedNumbers } = useSelector<RootState>(state => state.gamesInfo);
+	const { selectedGame, selectedNumbers } = useSelector((state: RootState) => state.gamesInfo);
 
 	function createNumbers(){
 		const totalNumbers = selectedGame?.range;
 		const gameNumber: number[] = [];
-		for(let i = 1; i <= totalNumbers; i++){
+		for(let i = 1; i <= totalNumbers!; i++){
 			gameNumber.push(i);
 		}
 		return gameNumber;
