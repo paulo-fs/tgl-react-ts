@@ -1,15 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GamesDataTypes } from '../../interfaces/gamesServicesInterface';
 
+interface GameTypes extends GamesDataTypes{
+  betNumbers: number[]
+}
+
+const selectedGame: GameTypes = {
+	id: 0,
+	type: '',
+	description: '',
+	range: 0,
+	price: 0,
+	max_number: 0,
+	color: '',
+	betNumbers: []
+};
+
 interface IinitState {
+  firstRender: boolean
   gamesInfo: GamesDataTypes[]
-  selectedGame: GamesDataTypes | null
+  games: GameTypes[]
+  selectedGame: GameTypes
   selectedNumbers: number[]
 }
 
 const initState: IinitState = {
+	firstRender: true,
 	gamesInfo: [],
-	selectedGame: null,
+	games: [],
+	selectedGame,
 	selectedNumbers: [],
 };
 
@@ -19,21 +38,28 @@ const gamesSlice = createSlice({
 	reducers: {
 		storeGamesInfo(state, action: PayloadAction<GamesDataTypes[]>){
 			state.gamesInfo = action.payload;
-			if(state.selectedGame === null)
-			  state.selectedGame = state.gamesInfo[0];
+			state.games = state.gamesInfo.map(gameType => {
+				return {...gameType, betNumbers: []};
+			});
+			if(state.firstRender === true){
+			  state.selectedGame = state.games[0];
+				state.firstRender = false;
+			// state.selectedGame = state.gamesInfo[0];
+			}
 		},
 
 		selectGame(state, action: PayloadAction<number>){
 			const id = action.payload;
-  	  state.selectedGame = state.gamesInfo[id -1];
+  	  state.selectedGame = state.games[id -1];
 		},
 
 		selectTheNumber(state, action: PayloadAction<number>){
 			const number = action.payload;
-			const index = state.selectedNumbers.findIndex(item => item === number);
+			const index = state.selectedGame.betNumbers.findIndex(item => item === number);
+
 			index === -1
-				? state.selectedNumbers.push(number)
-				: state.selectedNumbers.splice(index, 1);
+				? state.selectedGame.betNumbers.push(number)
+				: state.selectedGame.betNumbers.splice(index, 1);
 		}
 	}
 });

@@ -6,7 +6,7 @@ import { BetNumbers, BtnNumber } from './betNumbersComponentStyles';
 
 export function BetNumbersComponent(){
 	const dispatch = useAppDispatch();
-	const { selectedGame, selectedNumbers } = useSelector((state: RootState) => state.gamesInfo);
+	const { selectedGame, } = useSelector((state: RootState) => state.gamesInfo);
 
 	function createNumbers(){
 		const totalNumbers = selectedGame?.range;
@@ -26,7 +26,7 @@ export function BetNumbersComponent(){
 			{
 				createNumbers().map(i => {
 					const content = i < 10 ? '0'+String(i) : String(i);
-					const selected = selectedNumbers.includes(i);
+					const selected = selectedGame.betNumbers.includes(i);
 					return (
 						<BtnNumber key={i} isSelected={selected} onClick={() => selectNumberHandler(i)}>
 							{content}
