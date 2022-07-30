@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GamesDataTypes } from '../../interfaces/gamesServicesInterface';
+import { BetType } from './betSlie';
 
 interface GameTypes extends GamesDataTypes{
   betNumbers: number[]
@@ -15,6 +16,11 @@ const selectedGame: GameTypes = {
 	color: '',
 	betNumbers: []
 };
+
+interface selectGamePropTypes{
+  id: number
+  incompleteBet: BetType[]
+}
 
 interface IinitState {
   firstRender: boolean
@@ -48,9 +54,16 @@ const gamesSlice = createSlice({
 			}
 		},
 
-		selectGame(state, action: PayloadAction<number>){
-			const id = action.payload;
+		selectGame(state, action: PayloadAction<selectGamePropTypes>){
+			const id = action.payload.id;
   	  state.selectedGame = state.games[id -1];
+
+			const incompleteBets = action.payload.incompleteBet;
+			const type = state.selectedGame.type;
+			const curIncBet = incompleteBets.find(bet => bet.type === type);
+			if(curIncBet){
+				state.selectedGame.betNumbers = [...curIncBet.numbers];
+			}
 		},
 
 		selectTheNumber(state, action: PayloadAction<number>){

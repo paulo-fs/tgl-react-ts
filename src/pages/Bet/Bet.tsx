@@ -7,17 +7,19 @@ import { BetNumbersComponent } from './components/BetNumbersComponent';
 
 import { BetContainer, BetPageContainer, ChooseAGame, HeaderContainer } from './betStyles';
 import { gamesServices } from '../../shared/services/Games/gamesServices';
+import { GamesDataTypes } from '@interfaces/gamesServicesInterface';
 
 import { RootState, useAppDispatch } from '@store/store';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
 import { useSelector } from 'react-redux';
-import { GamesDataTypes } from '@interfaces/gamesServicesInterface';
+import { betStateActions } from '@store/slices/betSlie';
 
 export function Bet(){
 	const { getGamesData } = gamesServices();
 	const dispatch = useAppDispatch();
 
 	const { gamesInfo, selectedGame } = useSelector((state: RootState) => state.gamesInfo);
+	const { currentBet, incompleteBet } = useSelector((state: RootState) => state.betState);
 
  	useEffect(() => {
 		getGamesData()
@@ -27,7 +29,12 @@ export function Bet(){
 	}, [getGamesData]);
 
 	function selectGameHandler(id: number){
-		dispatch(gamesInfoActions.selectGame(id));
+		const curBetType = currentBet.find(bet => bet.type === selectedGame.type);
+		if(curBetType){
+			dispatch(betStateActions.icompleteBetHandler(curBetType));
+		}
+		// dispatch(gamesInfoActions.selectGame(id));
+		dispatch(gamesInfoActions.selectGame({id, incompleteBet}));
 	}
 
 	return(
