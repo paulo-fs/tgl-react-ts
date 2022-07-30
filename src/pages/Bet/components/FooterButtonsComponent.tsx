@@ -10,10 +10,14 @@ export function FooterButtonsComponent(){
 		dispatch(gamesInfoActions.clearGame());
 	}
 
+	function completeGame(){
+		dispatch(gamesInfoActions.completeGame());
+	}
+
 	return (
 		<FooterButtons>
 			<div>
-				<SecBtn>Complete game</SecBtn>
+				<SecBtn onClick={completeGame}>Complete game</SecBtn>
 				<SecBtn onClick={clearGame}>Clear game</SecBtn>
 			</div>
 			<AddToCart>

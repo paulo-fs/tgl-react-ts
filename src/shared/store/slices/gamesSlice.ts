@@ -74,8 +74,6 @@ const gamesSlice = createSlice({
 					? state.selectedGame.betNumbers.splice(index, 1)
 					: '';
 			}
-
-
 		},
 
 		icompleteBetHandler(state, action: PayloadAction<BetType>){
@@ -97,6 +95,21 @@ const gamesSlice = createSlice({
 
 		clearGame(state) {
 			state.selectedGame.betNumbers = [];
+		},
+
+		completeGame(state){
+			const maxNumbers = state.selectedGame.max_number;
+			const totalAvaliable = state.selectedGame.range;
+
+			for(let i = 0; i < totalAvaliable; i++){
+				const randownNum = Math.round(Math.random() * totalAvaliable);
+				console.log(randownNum);
+				if(state.selectedGame.betNumbers.length < maxNumbers && randownNum > 0){
+					state.selectedGame.betNumbers.find(num => num === randownNum)
+						? ''
+						: state.selectedGame.betNumbers.push(randownNum);
+				}
+			}
 		}
 	}
 });
