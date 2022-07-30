@@ -12,14 +12,12 @@ import { GamesDataTypes } from '@interfaces/gamesServicesInterface';
 import { RootState, useAppDispatch } from '@store/store';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
 import { useSelector } from 'react-redux';
-import { betStateActions } from '@store/slices/betSlie';
 
 export function Bet(){
 	const { getGamesData } = gamesServices();
 	const dispatch = useAppDispatch();
 
-	const { gamesInfo, selectedGame } = useSelector((state: RootState) => state.gamesInfo);
-	const { currentBet, incompleteBet } = useSelector((state: RootState) => state.betState);
+	const { games, selectedGame, incompleteBet } = useSelector((state: RootState) => state.gamesInfo);
 
  	useEffect(() => {
 		getGamesData()
@@ -29,11 +27,11 @@ export function Bet(){
 	}, [getGamesData]);
 
 	function selectGameHandler(id: number){
-		const curBetType = currentBet.find(bet => bet.type === selectedGame.type);
-		if(curBetType){
-			dispatch(betStateActions.icompleteBetHandler(curBetType));
-		}
-		// dispatch(gamesInfoActions.selectGame(id));
+		const incBet = {
+			type: selectedGame.type,
+			numbers: selectedGame.betNumbers
+		};
+		dispatch(gamesInfoActions.icompleteBetHandler(incBet));
 		dispatch(gamesInfoActions.selectGame({id, incompleteBet}));
 	}
 
@@ -49,7 +47,7 @@ export function Bet(){
 				<ChooseAGame>
 					<h2>Choose a game</h2>
 					<nav>
-						{gamesInfo.map((game: GamesDataTypes) => {
+						{games.map((game: GamesDataTypes) => {
 							const selected = (game.id === selectedGame!.id);
 							return (
 								<BetButton

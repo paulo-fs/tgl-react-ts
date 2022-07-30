@@ -1,10 +1,6 @@
+import { BetType, GameTypes, selectGamePropTypes } from '@interfaces/gameSliceInterfaces';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GamesDataTypes } from '../../interfaces/gamesServicesInterface';
-import { BetType } from './betSlie';
-
-interface GameTypes extends GamesDataTypes{
-  betNumbers: number[]
-}
 
 const selectedGame: GameTypes = {
 	id: 0,
@@ -17,25 +13,25 @@ const selectedGame: GameTypes = {
 	betNumbers: []
 };
 
-interface selectGamePropTypes{
-  id: number
-  incompleteBet: BetType[]
-}
+const emptyBet = {
+	type: '',
+	numbers: [1]
+};
 
 interface IinitState {
   firstRender: boolean
-  gamesInfo: GamesDataTypes[]
   games: GameTypes[]
   selectedGame: GameTypes
-  selectedNumbers: number[]
+  selectedNumbers: number[],
+  incompleteBet: BetType[]
 }
 
 const initState: IinitState = {
 	firstRender: true,
-	gamesInfo: [],
 	games: [],
 	selectedGame,
 	selectedNumbers: [],
+	incompleteBet: [emptyBet]
 };
 
 const gamesSlice = createSlice({
@@ -43,14 +39,12 @@ const gamesSlice = createSlice({
 	initialState: initState,
 	reducers: {
 		storeGamesInfo(state, action: PayloadAction<GamesDataTypes[]>){
-			state.gamesInfo = action.payload;
-			state.games = state.gamesInfo.map(gameType => {
+			state.games = action.payload.map(gameType => {
 				return {...gameType, betNumbers: []};
 			});
 			if(state.firstRender === true){
 			  state.selectedGame = state.games[0];
 				state.firstRender = false;
-			// state.selectedGame = state.gamesInfo[0];
 			}
 		},
 
@@ -62,17 +56,38 @@ const gamesSlice = createSlice({
 			const type = state.selectedGame.type;
 			const curIncBet = incompleteBets.find(bet => bet.type === type);
 			if(curIncBet){
-				state.selectedGame.betNumbers = [...curIncBet.numbers];
+				state.selectedGame.betNumbers = Array(...curIncBet.numbers);
 			}
 		},
 
-		selectTheNumber(state, action: PayloadAction<number>){
+		selectNumbers(state, action: PayloadAction<number>){
 			const number = action.payload;
 			const index = state.selectedGame.betNumbers.findIndex(item => item === number);
 
 			index === -1
 				? state.selectedGame.betNumbers.push(number)
 				: state.selectedGame.betNumbers.splice(index, 1);
+		},
+
+		icompleteBetHandler(state, action: PayloadAction<BetType>){
+			const type = action.payload.type;
+			const curIncompleteBet = state.incompleteBet.find(bet => bet.type === type);
+			const curBet = action.payload.numbers;
+
+			if(curIncompleteBet){
+			  state.incompleteBet.find(bet => bet.type === type)!.numbers = Array(...curBet);
+			} else {
+				state.incompleteBet = [
+					...state.incompleteBet,
+					{
+						type: type,
+						numbers: Array(...action.payload.numbers)
+					}];
+			}
+		},
+
+		clearGame(state) {
+			state.selectedGame.betNumbers = [];
 		}
 	}
 });
