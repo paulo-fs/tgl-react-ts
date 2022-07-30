@@ -63,10 +63,19 @@ const gamesSlice = createSlice({
 		selectNumbers(state, action: PayloadAction<number>){
 			const number = action.payload;
 			const index = state.selectedGame.betNumbers.findIndex(item => item === number);
+			const maxNumbers = state.selectedGame.max_number;
 
-			index === -1
-				? state.selectedGame.betNumbers.push(number)
-				: state.selectedGame.betNumbers.splice(index, 1);
+			if(state.selectedGame.betNumbers.length < maxNumbers){
+				index === -1
+					? state.selectedGame.betNumbers.push(number)
+					: state.selectedGame.betNumbers.splice(index, 1);
+			} else{
+				index !== -1
+					? state.selectedGame.betNumbers.splice(index, 1)
+					: '';
+			}
+
+
 		},
 
 		icompleteBetHandler(state, action: PayloadAction<BetType>){
