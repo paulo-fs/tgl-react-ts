@@ -1,4 +1,4 @@
-import { carActions } from '@store/slices/cartSlice';
+import { cartActions } from '@store/slices/cartSlice';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
 import { RootState, useAppDispatch } from '@store/store';
 import { ShoppingCartSimple } from 'phosphor-react';
@@ -24,7 +24,8 @@ export function FooterButtonsComponent(){
 			price: selectedGame.price,
 			color: selectedGame.color
 		};
-		dispatch(carActions.addToCart(gameToBeAdd));
+		dispatch(cartActions.addToCart(gameToBeAdd));
+		dispatch(gamesInfoActions.clearGame());
 	}
 
 	return (

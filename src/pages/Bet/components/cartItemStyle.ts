@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface PropType {
+  gameColor: string
+}
+
 export const DeleteBtn = styled.div`
 border: none;
 cursor: pointer;
@@ -9,7 +13,7 @@ cursor: pointer;
 }
 `;
 
-export const CartItemContainer = styled.div`
+export const CartItemContainer = styled.div<PropType>`
 display: flex;
 align-items: center;
 gap: .7rem;
@@ -21,7 +25,7 @@ gap: .7rem;
 
   padding: .5rem;
   border-radius: 5px;
-  border-left: 4px solid ${props => props.theme.green2};
+  border-left: 4px solid ${props => props.gameColor};
 
   p{
     font-size: 0.9rem;
@@ -31,9 +35,10 @@ gap: .7rem;
 
   h4{
     font-size: 1rem;
-    color: ${props => props.theme.green2};
+    color: ${props => props.gameColor};
 
     span{
+      color: ${props => props.theme.gray700};
       font-style: normal;
       font-weight: lighter;
       margin-left: .5rem;
