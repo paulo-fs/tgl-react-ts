@@ -17,7 +17,8 @@ const cartSlice = createSlice({
 				id: id,
 				type: action.payload.type,
 				numbers: action.payload.numbers,
-				price: action.payload.price
+				price: action.payload.price,
+				color: action.payload.color
 			};
 			const isUnique = state.betList?.find(bet => bet.id === newBet.id);
 

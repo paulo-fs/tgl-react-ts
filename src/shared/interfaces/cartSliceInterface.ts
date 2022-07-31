@@ -3,6 +3,7 @@ export interface BetList {
   type: string
   numbers: number[]
   price: number
+  color: string
 }
 
 export interface InitStateType {
@@ -15,4 +16,5 @@ export interface addToCartPayloadType {
   type: string
   numbers: number[]
   price: number
+  color: string
 }
