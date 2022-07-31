@@ -31,9 +31,19 @@ const cartSlice = createSlice({
 				.reduce((total, currentValue) => {
 					return total + currentValue;
 				}, 0);
+		},
+
+		deleteFromCart(state, action: PayloadAction<string>){
+			const id = action.payload;
+			const curPrice = state.betList?.find(bet => bet.id === id)?.price;
+			const index = state.betList!.findIndex(bet => bet.id === id);
+			if(index !== -1 && curPrice){
+				state.betList!.splice(index, 1);
+				state.cartTotalValue -= curPrice;
+			}
 		}
 	}
 });
 
-export const carActions = cartSlice.actions;
+export const cartActions = cartSlice.actions;
 export default cartSlice;
