@@ -103,7 +103,6 @@ const gamesSlice = createSlice({
 
 			for(let i = 0; i < 40; i++){
 				const randownNum = Math.round(Math.random() * totalAvaliable);
-				state.selectedGame.betNumbers = Array(...state.selectedGame.betNumbers);
 				if(state.selectedGame.betNumbers.length < maxNumbers && randownNum > 0){
 					state.selectedGame.betNumbers.find(num => num === randownNum)
 						? ''
