@@ -17,16 +17,25 @@ top: 6.5rem;
 background-color: ${props => props.theme.white};
 border: 2px solid ${props => props.theme.gray200};
 border-radius: 10px;
+
+h2{
+  padding: 2rem 1.4rem 0.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+
+  span{
+    margin-left: .5rem;
+    font-size: 1rem;
+    font-weight: lighter;
+    font-style: normal;
+    text-transform: none;
+  }
+}
 `;
 
 export const CartContent = styled.div`
-padding: 2rem 1.4rem;
+padding: 1rem 1.4rem 2rem;
 overflow-y: auto;
-
-h2{
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
 
 .cartContent{
   display: flex;

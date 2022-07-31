@@ -13,8 +13,14 @@ export function CartComponent(){
 
 	return (
 		<CartContainer>
+			<h2>Cart
+				{betList?.length > 0 &&
+          <span>
+            ({ betList?.length } { betList!.length === 1 ? 'item' : 'items'})
+          </span>
+				}
+			</h2>
 			<CartContent>
-				<h2>Cart</h2>
 				<div className='cartContent'>
 
 					{ betList!.length === 0 &&
