@@ -24,7 +24,7 @@ export function Bet(){
 			.then(response => {
 				dispatch(gamesInfoActions.storeGamesInfo(response.types));
 			});
-	}, [getGamesData]);
+	}, []);
 
 	function selectGameHandler(id: number){
 		const incBet = {
