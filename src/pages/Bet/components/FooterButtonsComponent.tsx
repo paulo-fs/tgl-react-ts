@@ -21,7 +21,8 @@ export function FooterButtonsComponent(){
 		const gameToBeAdd = {
 			type: selectedGame.type,
 			numbers: selectedGame.betNumbers,
-			price: selectedGame.price
+			price: selectedGame.price,
+			color: selectedGame.color
 		};
 		dispatch(carActions.addToCart(gameToBeAdd));
 	}
