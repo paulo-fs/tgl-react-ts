@@ -1,8 +1,12 @@
 import { RootState } from '@store/store';
 import { ArrowRight } from 'phosphor-react';
 import { useSelector } from 'react-redux';
-import { CartContainer, CartContent, CartFooter, } from './cartComponentStyle';
+import { CartContainer, CartContent, CartFooter, EmptyCart, } from './cartComponentStyle';
 import { CartItem } from './CartItem';
+
+export function moneyValueConverter(value: number){
+	return value.toFixed(2).replace('.', ',');
+}
 
 export function CartComponent(){
 	const { betList, cartTotalValue } = useSelector((state: RootState) => state.cart);
@@ -12,13 +16,19 @@ export function CartComponent(){
 			<CartContent>
 				<h2>Cart</h2>
 				<div className='cartContent'>
-					<CartItem />
+
+					{ betList!.length === 0 &&
+            <EmptyCart>The cart is empty, <br/>make a bet!</EmptyCart>}
+					{ betList!.length > 0 && betList?.map(bet => (
+						<CartItem key={bet.id} bet={bet} />
+					))}
+
 				</div>
 			</CartContent>
 
 			<CartFooter>
 				<p>
-            Cart <span>Total: R${cartTotalValue}</span>
+            Cart <span>Total: R${moneyValueConverter(cartTotalValue)}</span>
 				</p>
 				<div>
 					<button>

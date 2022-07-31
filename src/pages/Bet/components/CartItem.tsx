@@ -1,10 +1,19 @@
-import { RootState } from '@store/store';
+import { addToCartPayloadType } from '@interfaces/cartSliceInterface';
 import { Trash } from 'phosphor-react';
-import { useSelector } from 'react-redux';
+import { moneyValueConverter } from './CartComponent';
 import { CartItemContainer, DeleteBtn } from './cartItemStyle';
 
-export function CartItem(){
-	const { betList, cartTotalValue } = useSelector((state: RootState) => state.cart);
+interface BetPropType extends addToCartPayloadType {
+  id: string
+}
+
+interface PropType {
+  bet: BetPropType;
+}
+
+export function CartItem({ bet }: PropType){
+
+	const { color, id, numbers, price, type } = bet;
 
 	return (
 		<CartItemContainer>
@@ -13,9 +22,9 @@ export function CartItem(){
 			</DeleteBtn>
 			<div className='cartInfos'>
 				<p>
-                  01, 02, 04, 05, 06, 07, 09, 15, 17, 20, 21, 22, 23, 24, 25
+					{ numbers }
 				</p>
-				<h4>Lotofácil <span>R${cartTotalValue}</span></h4>
+				<h4>{ type } <span>R${moneyValueConverter(price)}</span></h4>
 			</div>
 		</CartItemContainer>
 	);
