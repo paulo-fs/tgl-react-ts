@@ -22,7 +22,7 @@ interface IinitState {
   firstRender: boolean
   games: GameTypes[]
   selectedGame: GameTypes
-  selectedNumbers: number[],
+  selectedNumbers: number[]
   incompleteBet: BetType[]
 }
 

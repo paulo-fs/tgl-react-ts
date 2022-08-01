@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import { ShoppingCartSimple } from 'phosphor-react';
 import { AddToCart, FooterButtons, SecBtn } from './footerButtonsComponentStyles';
-import { modalActions } from '@store/slices/modalSlice';
+import { ModalActionOptions, modalActions } from '@store/slices/modalSlice';
 
 
 export function FooterButtonsComponent(){
@@ -14,8 +14,11 @@ export function FooterButtonsComponent(){
 	const { selectedGame } = useSelector((state: RootState) => state.gamesInfo);
 
 	function clearGame(){
-		dispatch(gamesInfoActions.clearGame());
-		dispatch(modalActions.showModal());
+		const modalData = {
+			message: 'Tem certeza que deseja limpar o jogo?',
+			action: ModalActionOptions.CLEAR_GAME
+		};
+		dispatch(modalActions.showModal(modalData));
 	}
 
 	function completeGame(){

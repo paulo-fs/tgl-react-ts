@@ -1,25 +1,45 @@
 // import ReactModal from 'react-modal';
-import { modalActions } from '@store/slices/modalSlice';
+import { ModalActionOptions, modalActions } from '@store/slices/modalSlice';
 import { RootState, useAppDispatch } from '@store/store';
 import { useSelector } from 'react-redux';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Warning } from 'phosphor-react';
+import { gamesInfoActions } from '@store/slices/gamesSlice';
 
 Modal.setAppElement('#root');
 
 export function ConfirmModal(){
-	const { isOpen } = useSelector((state: RootState) => state.modal);
+	const { isOpen, modalMessage, modalAction } = useSelector((state: RootState) => state.modal);
 	const dispatch = useAppDispatch();
 
 	function closeModal(){
 		dispatch(modalActions.closeModal());
 	}
 
+	function confirmHandler(){
+		dispatch(modalActions.closeModal());
+		switch(modalAction){
+		case ModalActionOptions.CLEAR_GAME:
+			return dispatch(gamesInfoActions.clearGame());
+		default:
+			return '';
+		}
+	}
+
+	function cancelHandler(){
+		dispatch(modalActions.closeModal());
+	}
+
+	function clearModalData(){
+		dispatch(modalActions.clearModalData());
+	}
+
 	return(
 		<Modal
 			isOpen={isOpen}
 			onRequestClose={closeModal}
+			onAfterClose={clearModalData}
 			overlayClassName='modalOverlay'
 			className='modalContent'
 		>
@@ -28,11 +48,11 @@ export function ConfirmModal(){
 					<Warning size={48} color='#AB222E' />
 				</h1>
 				<p>
-          Está certo de que deseja limpar este jogo?
+					{ modalMessage }
 				</p>
 				<div>
-					<Confirm>Confirm</Confirm>
-					<Cancel>Cancel</Cancel>
+					<Confirm onClick={confirmHandler}>Confirm</Confirm>
+					<Cancel onClick={cancelHandler}>Cancel</Cancel>
 				</div>
 			</ModalContent>
 		</Modal>
