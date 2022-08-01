@@ -1,21 +1,37 @@
-import { AuthContainer, InputContainer } from './authStyle';
-import { ArrowRight } from 'phosphor-react';
-import { AuthPrimaryBtn } from '@components/Buttons/AuthPrimaryBtn';
-import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
+import { FormEvent, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { authServices } from '../../../shared/services/Auth/authServices';
 import { useAppDispatch } from '@store/store';
 import { AuthComponentType, uiAuthActions } from '@store/slices/uiAuthSlice';
-import { useNavigate } from 'react-router-dom';
-import { FormEvent } from 'react';
 import { authActions } from '@store/slices/authSlice';
 
+import { AuthPrimaryBtn } from '@components/Buttons/AuthPrimaryBtn';
+import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
+
+import { AuthContainer, InputContainer } from './authStyle';
+import { ArrowRight } from 'phosphor-react';
+
 export function Authentication(){
+	const emailInput = useRef<HTMLInputElement | null>(null);
+	const passInput = useRef<HTMLInputElement | null>(null);
+	const { login } = authServices();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	async function submitHandler(event: FormEvent) {
 		event.preventDefault();
-		dispatch(authActions.login());
-		navigate('/bet');
+		const bodyLogin = {
+			email: emailInput.current!.value,
+			password: passInput.current!.value,
+		};
+		login(bodyLogin)
+			.then(response => {
+				dispatch(authActions.login(response));
+				navigate('/bet');
+			});
+		emailInput.current!.value = '';
+    passInput.current!.value = '';
 	}
 
 	function callRegisterComponent(){
@@ -31,10 +47,10 @@ export function Authentication(){
 			<h3>Authentication</h3>
 			<form onSubmit={submitHandler}>
 				<InputContainer>
-  				<input type="email" name="email" id="email" placeholder="Email"/>
+  				<input type="email" id='email' placeholder="Email" ref={emailInput} />
 				</InputContainer>
 				<InputContainer>
-					<input type="password" name="password" placeholder="Password" />
+					<input type="password" placeholder="Password" ref={passInput} />
 				</InputContainer>
 				<button
 					className='forgotPass'

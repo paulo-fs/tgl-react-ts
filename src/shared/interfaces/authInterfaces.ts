@@ -13,13 +13,13 @@ export interface IAuth{
 }
 
 
-interface Token {
+export interface Token {
   type:       string;
   token:      string;
   expires_at: Date;
 }
 
-interface User {
+export interface User {
   id:               number;
   email:            string;
   is_admin:         number;
