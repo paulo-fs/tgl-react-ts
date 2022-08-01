@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  :root{
+    --toastify-color-progress-success: #27C383;
+    --toastify-color-progress-warning:#FBA94C;
+    --toastify-color-progress-error: #AB222E;
+  }
+
   *{
     margin: 0;
     padding: 0;
