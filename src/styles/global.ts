@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
   }
 
   body, input, textarea, button{
@@ -33,5 +34,27 @@ export const GlobalStyle = createGlobalStyle`
 
   a{
     text-decoration: none;
+  }
+
+  .modalOverlay{
+    background: rgba(0,0,0, 0.75);
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: grid;
+    place-content: center;
+  }
+
+  .modalContent{
+    width: 32rem;
+    height: 20rem;
+    border-radius: 10px;
+    padding: 3rem;
+    background-color: #F7F7F7;
+    position: relative;
   }
 `;
