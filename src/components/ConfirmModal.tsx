@@ -1,16 +1,20 @@
-// import ReactModal from 'react-modal';
-import { ModalActionOptions, modalActions } from '@store/slices/modalSlice';
+import Modal from 'react-modal';
+import { toast } from 'react-toastify';
+
 import { RootState, useAppDispatch } from '@store/store';
 import { useSelector } from 'react-redux';
-import Modal from 'react-modal';
+
+import { ModalActionOptions, modalActions } from '@store/slices/modalSlice';
+import { gamesInfoActions } from '@store/slices/gamesSlice';
+import { cartActions } from '@store/slices/cartSlice';
+
 import styled from 'styled-components';
 import { Warning } from 'phosphor-react';
-import { gamesInfoActions } from '@store/slices/gamesSlice';
 
 Modal.setAppElement('#root');
 
 export function ConfirmModal(){
-	const { isOpen, modalMessage, modalAction } = useSelector((state: RootState) => state.modal);
+	const { isOpen, modalMessage, modalAction, id } = useSelector((state: RootState) => state.modal);
 	const dispatch = useAppDispatch();
 
 	function closeModal(){
@@ -21,7 +25,11 @@ export function ConfirmModal(){
 		dispatch(modalActions.closeModal());
 		switch(modalAction){
 		case ModalActionOptions.CLEAR_GAME:
+			toast.success('Game cleared');
 			return dispatch(gamesInfoActions.clearGame());
+		case ModalActionOptions.DELETE_BET:
+			toast.success('Bet deleted!');
+			return dispatch(cartActions.deleteFromCart(id));
 		default:
 			return '';
 		}

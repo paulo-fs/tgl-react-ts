@@ -8,12 +8,14 @@ export enum ModalActionOptions {
 interface ModalPayloadType{
   message: string
   action: ModalActionOptions
+  id?: string
 }
 
 const initState = {
 	isOpen: false,
 	modalMessage: '',
-	modalAction: ''
+	modalAction: '',
+	id: ''
 };
 
 const modalSlice = createSlice({
@@ -24,6 +26,8 @@ const modalSlice = createSlice({
 			state.isOpen = true;
 			state.modalMessage = action.payload.message;
 			state.modalAction = action.payload.action;
+			if(action.payload.id)
+			  state.id = action.payload.id;
 		},
 
 		closeModal(state){
@@ -34,6 +38,7 @@ const modalSlice = createSlice({
 			state.isOpen = false;
 			state.modalMessage = '';
 			state.modalAction = '';
+			state.id = '';
 		}
 	}
 });

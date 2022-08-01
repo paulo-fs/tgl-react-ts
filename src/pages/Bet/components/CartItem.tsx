@@ -1,5 +1,5 @@
 import { addToCartPayloadType } from '@interfaces/cartSliceInterface';
-import { cartActions } from '@store/slices/cartSlice';
+import { ModalActionOptions, modalActions } from '@store/slices/modalSlice';
 import { useAppDispatch } from '@store/store';
 import { Trash } from 'phosphor-react';
 import { moneyValueConverter } from './CartComponent';
@@ -26,7 +26,12 @@ export function CartItem({ bet }: PropType){
 	}
 
 	function deleteHundler(){
-		dispatch(cartActions.deleteFromCart(id));
+		const modalData = {
+			message: 'Você está certo de que deseja excluir esta aposta?',
+			action: ModalActionOptions.DELETE_BET,
+			id: id
+		};
+		dispatch(modalActions.showModal(modalData));
 	}
 
 	return (

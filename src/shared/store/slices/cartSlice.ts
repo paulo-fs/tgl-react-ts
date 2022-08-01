@@ -1,6 +1,5 @@
 import { addToCartPayloadType, InitStateType } from '@interfaces/cartSliceInterface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 const initState: InitStateType = {
 	betList: [],
@@ -42,7 +41,6 @@ const cartSlice = createSlice({
 				state.betList!.splice(index, 1);
 				state.cartTotalValue -= curPrice;
 			}
-			toast.success('Bet deleted!');
 		}
 	}
 });
