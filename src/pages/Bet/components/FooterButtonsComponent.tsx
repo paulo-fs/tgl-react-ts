@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { ShoppingCartSimple } from 'phosphor-react';
 import { AddToCart, FooterButtons, SecBtn } from './footerButtonsComponentStyles';
 import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
 
 export function FooterButtonsComponent(){
 	const dispatch = useAppDispatch();
@@ -21,7 +20,6 @@ export function FooterButtonsComponent(){
 	}
 
 	function addToCart(){
-		toast.success('Game added successfully', {autoClose: 3000});
 		const gameToBeAdd = {
 			type: selectedGame.type,
 			numbers: selectedGame.betNumbers,
