@@ -5,14 +5,17 @@ import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
 import { useAppDispatch } from '@store/store';
 import { AuthComponentType, uiAuthActions } from '@store/slices/uiAuthSlice';
 import { useNavigate } from 'react-router-dom';
+import { FormEvent } from 'react';
+import { authActions } from '@store/slices/authSlice';
 
 export function Authentication(){
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	async function submitHandler() {
-		// navigate('/bet');
-
+	async function submitHandler(event: FormEvent) {
+		event.preventDefault();
+		dispatch(authActions.login());
+		navigate('/bet');
 	}
 
 	function callRegisterComponent(){

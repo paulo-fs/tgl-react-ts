@@ -1,6 +1,7 @@
 import { AuthComponentType } from '@store/slices/uiAuthSlice';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Authentication } from './components/Authentication';
 import { Registration } from './components/Registration';
 import { ResetPass } from './components/ResetPass';
@@ -8,6 +9,12 @@ import { LoginContainer } from './stylesLogin';
 
 export function AuthMainPage(){
 	const authComponentSelector = useSelector<RootState>(state => state.uiAuth.visibleComponent);
+	const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+	const navigate = useNavigate();
+
+	if(isAuthenticated){
+		navigate('/bet');
+	}
 
 	function switchAuthComponent(){
 		switch(authComponentSelector){
