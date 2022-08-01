@@ -2,6 +2,7 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import cartSlice from './slices/cartSlice';
 import gamesSlice from './slices/gamesSlice';
+import modalSlice from './slices/modalSlice';
 import uiAuthSlice from './slices/uiAuthSlice';
 
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
 		uiAuth: uiAuthSlice.reducer,
 		gamesInfo: gamesSlice.reducer,
 		cart: cartSlice.reducer,
+		modal: modalSlice.reducer
 	}
 });
 

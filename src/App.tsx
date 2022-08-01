@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ConfirmModal } from '@components/ConfirmModal';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
 		<ThemeProvider theme={defaultTheme}>
 			<BrowserRouter>
 				<Router />
+				<ConfirmModal />
 			</BrowserRouter>
 			<GlobalStyle />
 			<ToastContainer autoClose={3000} />

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import { ShoppingCartSimple } from 'phosphor-react';
 import { AddToCart, FooterButtons, SecBtn } from './footerButtonsComponentStyles';
+import { modalActions } from '@store/slices/modalSlice';
 
 
 export function FooterButtonsComponent(){
@@ -14,6 +15,7 @@ export function FooterButtonsComponent(){
 
 	function clearGame(){
 		dispatch(gamesInfoActions.clearGame());
+		dispatch(modalActions.showModal());
 	}
 
 	function completeGame(){
