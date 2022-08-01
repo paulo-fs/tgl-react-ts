@@ -51,19 +51,32 @@ export const EmptyCart = styled.p`
 `;
 
 export const CartFooter = styled.div`
-p{
-  padding: 2.5rem 1.4rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
+div{
+  position: relative;
 
-  span{
-    font-style: normal;
-    font-weight: lighter;
+  p{
+    padding: 2.5rem 1.4rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    span{
+      font-style: normal;
+      font-weight: lighter;
+    }
+  }
+
+  .minCartValue{
+    position: absolute;
+    bottom: 1.4rem;
+    left: 1.4rem;
+    font-size: .9rem;
+    color: ${props => props.theme.green2};
   }
 }
 
-div{
+
+.save{
   width: 100%;
   padding: 1.5rem;
   border-top: 2px solid ${props => props.theme.gray200};

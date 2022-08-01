@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export enum ModalActionOptions {
-  CLEAR_GAME = 'CLEAR_GAME',
-  DELETE_BET = 'DELETE_BET'
-}
+import { ModalActionOptions } from './modalActionsOptions';
 
 interface ModalPayloadType{
   message: string

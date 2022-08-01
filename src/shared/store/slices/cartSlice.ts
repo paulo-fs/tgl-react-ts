@@ -4,17 +4,23 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const initState: InitStateType = {
 	betList: [],
 	cartTotalValue: 0,
-	firstRender: true
+	firstRender: true,
+	minCartValue: 0
 };
 
 const cartSlice = createSlice({
 	name: 'cart',
 	initialState: initState,
 	reducers: {
+		storeMinCartValue(state, action: PayloadAction<number>){
+			state.minCartValue = action.payload;
+		},
+
 		addToCart(state, action: PayloadAction<addToCartPayloadType>){
 			const id = String(new Date().getTime());
 			const newBet = {
 				id: id,
+				gameId: action.payload.gameId,
 				type: action.payload.type,
 				numbers: action.payload.numbers,
 				price: action.payload.price,

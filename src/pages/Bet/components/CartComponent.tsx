@@ -1,6 +1,9 @@
-import { RootState } from '@store/store';
+import { ModalActionOptions } from '@store/slices/modalActionsOptions';
+import { modalActions } from '@store/slices/modalSlice';
+import { RootState, useAppDispatch } from '@store/store';
 import { ArrowRight } from 'phosphor-react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { CartContainer, CartContent, CartFooter, EmptyCart, } from './cartComponentStyle';
 import { CartItem } from './CartItem';
 
@@ -9,7 +12,22 @@ export function moneyValueConverter(value: number){
 }
 
 export function CartComponent(){
-	const { betList, cartTotalValue } = useSelector((state: RootState) => state.cart);
+	const dispatch = useAppDispatch();
+	const { betList, cartTotalValue, minCartValue } = useSelector((state: RootState) => state.cart);
+
+
+	function saveCartHandler(){
+		const modalData = {
+			message: 'Você tem certeza que deseja salvar o carrinho?',
+			action: ModalActionOptions.SAVE_CART
+		};
+		if(cartTotalValue < minCartValue){
+			const missingValue = minCartValue - cartTotalValue;
+			const message = `Is missing more R$${moneyValueConverter(missingValue)} to complete the cart`;
+			return toast.error(message);
+		}
+		dispatch(modalActions.showModal(modalData));
+	}
 
 	return (
 		<CartContainer>
@@ -33,11 +51,17 @@ export function CartComponent(){
 			</CartContent>
 
 			<CartFooter>
-				<p>
-            Cart <span>Total: R${moneyValueConverter(cartTotalValue)}</span>
-				</p>
 				<div>
-					<button>
+					<p>
+            Cart
+						<span> Total: R${moneyValueConverter(cartTotalValue)}</span>
+					</p>
+					<span className='minCartValue'>
+            Minimum cart value: R${moneyValueConverter(minCartValue)}
+					</span>
+				</div>
+				<div className='save'>
+					<button onClick={saveCartHandler}>
               Save
 						<ArrowRight color='#27C383'/>
 					</button>

@@ -1,5 +1,6 @@
 import { addToCartPayloadType } from '@interfaces/cartSliceInterface';
-import { ModalActionOptions, modalActions } from '@store/slices/modalSlice';
+import { ModalActionOptions } from '@store/slices/modalActionsOptions';
+import { modalActions } from '@store/slices/modalSlice';
 import { useAppDispatch } from '@store/store';
 import { Trash } from 'phosphor-react';
 import { moneyValueConverter } from './CartComponent';

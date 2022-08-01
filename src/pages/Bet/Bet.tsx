@@ -12,6 +12,7 @@ import { GamesDataTypes } from '@interfaces/gamesServicesInterface';
 import { RootState, useAppDispatch } from '@store/store';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
 import { useSelector } from 'react-redux';
+import { cartActions } from '@store/slices/cartSlice';
 
 export function Bet(){
 	const { getGamesData } = gamesServices();
@@ -23,6 +24,7 @@ export function Bet(){
 		getGamesData()
 			.then(response => {
 				dispatch(gamesInfoActions.storeGamesInfo(response.types));
+				dispatch(cartActions.storeMinCartValue(response.min_cart_value));
 			});
 	}, []);
 

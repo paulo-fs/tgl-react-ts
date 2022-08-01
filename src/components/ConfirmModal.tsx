@@ -4,7 +4,8 @@ import { toast } from 'react-toastify';
 import { RootState, useAppDispatch } from '@store/store';
 import { useSelector } from 'react-redux';
 
-import { ModalActionOptions, modalActions } from '@store/slices/modalSlice';
+import { modalActions } from '@store/slices/modalSlice';
+import { ModalActionOptions } from '@store/slices/modalActionsOptions';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
 import { cartActions } from '@store/slices/cartSlice';
 
@@ -15,6 +16,7 @@ Modal.setAppElement('#root');
 
 export function ConfirmModal(){
 	const { isOpen, modalMessage, modalAction, id } = useSelector((state: RootState) => state.modal);
+	const { betList } = useSelector((state: RootState) => state.cart);
 	const dispatch = useAppDispatch();
 
 	function closeModal(){
@@ -23,13 +25,19 @@ export function ConfirmModal(){
 
 	function confirmHandler(){
 		dispatch(modalActions.closeModal());
+
 		switch(modalAction){
 		case ModalActionOptions.CLEAR_GAME:
 			toast.success('Game cleared');
 			return dispatch(gamesInfoActions.clearGame());
+
 		case ModalActionOptions.DELETE_BET:
 			toast.success('Bet deleted!');
 			return dispatch(cartActions.deleteFromCart(id));
+
+		case ModalActionOptions.SAVE_CART:
+			return toast.success('cart saved');
+
 		default:
 			return '';
 		}
