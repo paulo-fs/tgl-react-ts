@@ -11,6 +11,8 @@ import { cartActions } from '@store/slices/cartSlice';
 
 import styled from 'styled-components';
 import { Warning } from 'phosphor-react';
+import { authActions } from '@store/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -18,6 +20,7 @@ export function ConfirmModal(){
 	const { isOpen, modalMessage, modalAction, id } = useSelector((state: RootState) => state.modal);
 	const { betList } = useSelector((state: RootState) => state.cart);
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	function closeModal(){
 		dispatch(modalActions.closeModal());
@@ -30,14 +33,15 @@ export function ConfirmModal(){
 		case ModalActionOptions.CLEAR_GAME:
 			toast.success('Game cleared');
 			return dispatch(gamesInfoActions.clearGame());
-
 		case ModalActionOptions.DELETE_BET:
 			toast.success('Bet deleted!');
 			return dispatch(cartActions.deleteFromCart(id));
-
 		case ModalActionOptions.SAVE_CART:
 			return toast.success('cart saved');
-
+		case ModalActionOptions.LOGOUT:
+			dispatch(authActions.logout());
+			toast.success('Até a próxima!');
+			return navigate('/');
 		default:
 			return '';
 		}

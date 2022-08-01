@@ -1,16 +1,18 @@
 import { HeaderContainer, Logo, Links } from './headerStyles';
 import { ArrowRight } from 'phosphor-react';
 import { useAppDispatch } from '@store/store';
-import { authActions } from '@store/slices/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { modalActions } from '@store/slices/modalSlice';
+import { ModalActionOptions } from '@store/slices/modalActionsOptions';
 
 export function Header(){
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 
 	function logoutHandler(){
-		dispatch(authActions.logout());
-		navigate('/');
+		const modalData = {
+			message: 'Tem certeza que deseja sair?',
+			action: ModalActionOptions.LOGOUT
+		};
+		dispatch(modalActions.showModal(modalData));
 	}
 	return(
 		<HeaderContainer>
