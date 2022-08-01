@@ -11,6 +11,7 @@ import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
 
 import { AuthContainer, InputContainer } from './authStyle';
 import { ArrowRight } from 'phosphor-react';
+import { toast } from 'react-toastify';
 
 export function Authentication(){
 	const emailInput = useRef<HTMLInputElement | null>(null);
@@ -29,6 +30,9 @@ export function Authentication(){
 			.then(response => {
 				dispatch(authActions.login(response));
 				navigate('/bet');
+			})
+			.catch((error) => {
+				toast.error(error.data.message);
 			});
 		emailInput.current!.value = '';
     passInput.current!.value = '';
