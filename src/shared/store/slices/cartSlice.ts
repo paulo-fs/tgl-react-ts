@@ -19,7 +19,7 @@ const cartSlice = createSlice({
 				type: action.payload.type,
 				numbers: action.payload.numbers,
 				price: action.payload.price,
-				color: action.payload.color
+				color: action.payload.color,
 			};
 			const isUnique = state.betList?.find(bet => bet.id === newBet.id);
 
@@ -32,7 +32,6 @@ const cartSlice = createSlice({
 				.reduce((total, currentValue) => {
 					return total + currentValue;
 				}, 0);
-			toast.success('Bet added!');
 		},
 
 		deleteFromCart(state, action: PayloadAction<string>){
