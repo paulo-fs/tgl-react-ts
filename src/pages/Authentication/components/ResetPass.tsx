@@ -21,14 +21,16 @@ export function ResetPass(){
 	async function submitHandler(event: FormEvent){
 		event.preventDefault();
 		const enteredEmail = {email: emailInput.current!.value};
+		const resPassToast = toast.loading('Please wait...');
 		resetPass(enteredEmail)
 			.then(response => {
 				console.log(response);
+				toast.update(resPassToast, {render: 'Password reseted!', type: 'success', isLoading: false, autoClose: 2000});
 				dispatch(authActions.logout());
 			})
 			.catch(error => {
 				console.log(error);
-				toast.error(error.data.message);
+				toast.update(resPassToast, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
 			});
 	}
 
