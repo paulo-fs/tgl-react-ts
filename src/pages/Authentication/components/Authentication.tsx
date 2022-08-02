@@ -28,6 +28,8 @@ export function Authentication(){
 		};
 		login(bodyLogin)
 			.then(response => {
+				const authDataJSON = JSON.stringify(response);
+				localStorage.setItem('@tgl-1.0:auth-data', authDataJSON);
 				dispatch(authActions.login(response));
 				navigate('/bet');
 			})
