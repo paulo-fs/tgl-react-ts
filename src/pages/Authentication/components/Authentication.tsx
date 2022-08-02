@@ -21,6 +21,7 @@ export function Authentication(){
 	const navigate = useNavigate();
 
 	async function submitHandler(event: FormEvent) {
+		const toastLoading = toast.loading(('Please wait...'));
 		event.preventDefault();
 		const bodyLogin = {
 			email: emailInput.current!.value,
@@ -28,13 +29,14 @@ export function Authentication(){
 		};
 		login(bodyLogin)
 			.then(response => {
+				toast.update(toastLoading, {render: 'Login successfully!', type: 'success', isLoading: false, autoClose: 2000});
 				const authDataJSON = JSON.stringify(response);
 				localStorage.setItem('@tgl-1.0:auth-data', authDataJSON);
 				dispatch(authActions.login(response));
 				navigate('/bet');
 			})
 			.catch((error) => {
-				toast.error(error.data.message);
+				toast.update(toastLoading, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
 			});
 		emailInput.current!.value = '';
     passInput.current!.value = '';
