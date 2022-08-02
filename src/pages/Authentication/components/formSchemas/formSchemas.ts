@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 
-export const registrationFormInitValues = {
+export const resetPassFormInitValues = {
 	email: ''
 };
 
-export const registrationFormValidationSchema = {
+export const resetPassFormValidationSchema = {
 	email: yup
 		.string()
 		.email('Email inválido!')
@@ -27,3 +27,4 @@ export const authFormValidationSchema = {
 		.min(6, 'A senha precisa ter pelo menos 6 caracteres')
 		.required('O campo de senha é obrigatório')
 };
+

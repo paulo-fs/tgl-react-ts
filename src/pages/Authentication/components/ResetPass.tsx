@@ -13,7 +13,7 @@ import { authActions } from '@store/slices/authSlice';
 
 import { AuthContainer, FormikError, InputContainer } from './authStyle';
 import { ArrowLeft, ArrowRight } from 'phosphor-react';
-import { registrationFormInitValues, registrationFormValidationSchema } from './formSchemas/formSchemas';
+import { resetPassFormInitValues, resetPassFormValidationSchema } from './formSchemas/formSchemas';
 
 export function ResetPass(){
 	const emailInput = useRef<HTMLInputElement | null>(null);
@@ -21,8 +21,8 @@ export function ResetPass(){
 	const dispatch = useAppDispatch();
 
 	const formik = useFormik({
-		initialValues: registrationFormInitValues,
-		validationSchema: yup.object(registrationFormValidationSchema),
+		initialValues: resetPassFormInitValues,
+		validationSchema: yup.object(resetPassFormValidationSchema),
 
 		onSubmit: (values) => {
 			const resPassToast = toast.loading('Resetando a senha...');

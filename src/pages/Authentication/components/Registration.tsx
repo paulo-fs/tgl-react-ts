@@ -1,13 +1,17 @@
-import { AuthContainer, InputContainer } from './authStyle';
-import { ArrowLeft, ArrowRight } from 'phosphor-react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '@store/store';
+import { FormEvent, useRef } from 'react';
+import { toast } from 'react-toastify';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+import { registerService } from '../../../shared/services/Auth/registerService';
+import { AuthComponentType, uiAuthActions } from '@store/slices/uiAuthSlice';
 import { AuthPrimaryBtn } from '@components/Buttons/AuthPrimaryBtn';
 import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
-import { useAppDispatch } from '@store/store';
-import { AuthComponentType, uiAuthActions } from '@store/slices/uiAuthSlice';
-import { FormEvent, useRef } from 'react';
-import { registerService } from '../../../shared/services/Auth/registerService';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
+import { AuthContainer, InputContainer } from './authStyle';
+import { ArrowLeft, ArrowRight } from 'phosphor-react';
 
 export function Registration(){
 	const emailInput = useRef<HTMLInputElement | null>(null);
