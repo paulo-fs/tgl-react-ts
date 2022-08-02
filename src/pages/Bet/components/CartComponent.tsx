@@ -1,7 +1,9 @@
+import { cartActions } from '@store/slices/cartSlice';
 import { ModalActionOptions } from '@store/slices/modalActionsOptions';
 import { modalActions } from '@store/slices/modalSlice';
 import { RootState, useAppDispatch } from '@store/store';
 import { ArrowRight } from 'phosphor-react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { CartContainer, CartContent, CartFooter, EmptyCart, } from './cartComponentStyle';
@@ -11,10 +13,21 @@ export function moneyValueConverter(value: number){
 	return value.toFixed(2).replace('.', ',');
 }
 
+let firstRender = true;
+
 export function CartComponent(){
 	const dispatch = useAppDispatch();
 	const { betList, cartTotalValue, minCartValue } = useSelector((state: RootState) => state.cart);
 
+	useEffect(() => {
+	  if(firstRender){
+	    firstRender = false;
+			const cartDataJSON = localStorage.getItem('@tgl-1.0:cart-data');
+			cartDataJSON
+				? dispatch(cartActions.updateCartSlice(cartDataJSON))
+				: '';
+	  }
+	}, []);
 
 	function saveCartHandler(){
 		const modalData = {

@@ -27,7 +27,7 @@ const authSlice = createSlice({
 			state.isAuthenticated = false;
 			state.token = undefined;
 			state.user = undefined;
-			localStorage.clear();
+			localStorage.removeItem('@tgl-1.0:auth-data');
 		},
 	}
 });

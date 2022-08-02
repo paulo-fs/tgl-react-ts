@@ -21,3 +21,8 @@ export interface addToCartPayloadType {
   price: number
   color: string
 }
+
+export interface UpdateCartOnLocalStorageType {
+  betList: BetList[]
+  cartTotalValue: number
+}

@@ -1,4 +1,4 @@
-import { addToCartPayloadType, InitStateType } from '@interfaces/cartSliceInterface';
+import { addToCartPayloadType, InitStateType, UpdateCartOnLocalStorageType } from '@interfaces/cartSliceInterface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initState: InitStateType = {
@@ -7,6 +7,14 @@ const initState: InitStateType = {
 	firstRender: true,
 	minCartValue: 0
 };
+
+function updateCartOnLocalStorage ({betList, cartTotalValue}: UpdateCartOnLocalStorageType){
+	localStorage.removeItem('@tgl-1.0:cart-data');
+	const cartData = {betList, cartTotalValue};
+	const cartDataJSON = JSON.stringify(cartData);
+	if(cartDataJSON)
+	  localStorage.setItem('@tgl-1.0:cart-data', cartDataJSON);
+}
 
 const cartSlice = createSlice({
 	name: 'cart',
@@ -37,6 +45,9 @@ const cartSlice = createSlice({
 				.reduce((total, currentValue) => {
 					return total + currentValue;
 				}, 0);
+
+			const cartData = { betList: state.betList!, cartTotalValue: state.cartTotalValue };
+			updateCartOnLocalStorage(cartData);
 		},
 
 		deleteFromCart(state, action: PayloadAction<string>){
@@ -47,6 +58,14 @@ const cartSlice = createSlice({
 				state.betList!.splice(index, 1);
 				state.cartTotalValue -= curPrice;
 			}
+			const cartData = { betList: state.betList!, cartTotalValue: state.cartTotalValue };
+			updateCartOnLocalStorage(cartData);
+		},
+
+		updateCartSlice(state, action: PayloadAction<string>){
+			const {betList, cartTotalValue} = JSON.parse(action.payload);
+			state.betList = betList;
+			state.cartTotalValue = cartTotalValue;
 		}
 	}
 });
