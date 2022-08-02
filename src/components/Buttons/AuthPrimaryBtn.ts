@@ -17,4 +17,9 @@ export const AuthPrimaryBtn = styled.button`
   &:not(:disabled):hover{
     opacity: .5;
   }
+
+  &:disabled{
+    opacity: .3;
+    cursor: not-allowed;
+  }
 `;

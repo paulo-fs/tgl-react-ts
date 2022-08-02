@@ -53,7 +53,10 @@ export function Registration(){
 				<InputContainer>
 					<input type="password" placeholder="Senha" ref={passInput} />
 				</InputContainer>
-				<AuthPrimaryBtn type="submit" onClick={submitHandler}>
+				<AuthPrimaryBtn
+					type="submit"
+					onClick={submitHandler}
+				>
           Cadastrar
 					<ArrowRight size={28} color='#B5C401' />
 				</AuthPrimaryBtn>

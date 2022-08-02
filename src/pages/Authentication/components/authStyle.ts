@@ -57,3 +57,11 @@ export const InputContainer = styled.div`
     }
   }
 `;
+
+export const FormikError = styled.div`
+  font-size: .8rem;
+  color: ${props => props.theme.red500};
+  margin-top: .8rem;
+  padding-top: .3rem;
+  border-top: 1px solid ${props => props.theme.red500};
+`;

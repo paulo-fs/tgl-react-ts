@@ -13,6 +13,7 @@
     "@types/react-modal": "^3.13.1",
     "@types/react-redux": "^7.1.24",
     "axios": "^0.27.2",
+    "formik": "^2.2.9",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
