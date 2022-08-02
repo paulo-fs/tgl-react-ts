@@ -4,7 +4,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const initState: InitStateType = {
 	betList: [],
 	cartTotalValue: 0,
-	firstRender: true,
 	minCartValue: 0,
 };
 
@@ -66,6 +65,12 @@ const cartSlice = createSlice({
 			const {betList, cartTotalValue} = JSON.parse(action.payload);
 			state.betList = betList;
 			state.cartTotalValue = cartTotalValue;
+		},
+
+		clearCartValues(state){
+			localStorage.removeItem('@tgl-1.0:cart-data');
+			state.betList = [];
+			state.cartTotalValue = 0;
 		}
 	}
 });

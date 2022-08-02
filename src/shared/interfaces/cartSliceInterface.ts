@@ -11,7 +11,6 @@ export interface BetList {
 export interface InitStateType {
   betList: BetList[] | null
   cartTotalValue: number
-  firstRender: boolean
   minCartValue: number
 }
 

@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export enum AuthComponentType {
   LOGIN_COMPONENT = 'LOGIN_COMPONENT',
   RESET_PASSWORD_COMPONENT = 'RESET_PASSWORD_COMPONENT',
-  REGISTER_COMPONENT = 'REGISTER_COMPONENT'
+  REGISTER_COMPONENT = 'REGISTER_COMPONENT',
+  NULL = 'null'
 }
 
 const initState = {

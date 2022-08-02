@@ -53,6 +53,7 @@ export function ConfirmModal(){
 			const toastSaveCart = toast.loading('Fazendo seu cadastro...');
 			postBetsData(games2).then(() => {
 				toast.update(toastSaveCart, {render: 'Carrinho salvo com sucesso!', type: 'success', isLoading: false, autoClose: 2000});
+				dispatch(cartActions.clearCartValues());
 			}).catch(error => {
 				toast.update(toastSaveCart, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
 				console.log(error.data);

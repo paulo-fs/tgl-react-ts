@@ -28,7 +28,7 @@ export function AuthMainPage(){
 		case AuthComponentType.RESET_PASSWORD_COMPONENT:
 			return <ResetPass />;
 		default:
-			return <Authentication />;
+			return;
 		}
 	}
 
