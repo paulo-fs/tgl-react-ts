@@ -1,8 +1,8 @@
-import { IBetService, IBetResponse, IGames } from '@interfaces/betServiceInterfaces';
+import { IBetService, IGames, IAllBets } from '@interfaces/betServiceInterfaces';
 import api from '../api';
 
 export function betService():IBetService {
-	async function getBetsData(): Promise<IBetResponse> {
+	async function getBetsData(): Promise<IAllBets[]> {
 		return api.get('/bet/all-bets');
 	}
 

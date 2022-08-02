@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
+interface PropTypes {
+  color: string
+}
+
 export const HeaderHistory = styled.header`
   margin: 2rem 0;
 
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
 
   div{
     display: flex;
@@ -20,17 +25,21 @@ export const HeaderHistory = styled.header`
       gap: 1rem;
     }
   }
-`;
 
-export const NewBetBtn = styled.button`
-  border: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: ${props => props.theme.green1};
+  .newBet{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: ${props => props.theme.green1};
 
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    transition: .2s;
+    &:hover{
+      opacity: .5;
+    }
+  }
 `;
 
 export const MainHistory = styled.main`
@@ -39,7 +48,7 @@ export const MainHistory = styled.main`
   }
 `;
 
-export const HistoryItem = styled.div`
+export const HistoryItem = styled.div<PropTypes>`
   display: flex;
   gap: .5rem;
 
@@ -59,12 +68,12 @@ export const HistoryItem = styled.div`
   .game{
     font-size: 1.125rem;
     font-weight: bold;
-    color: ${props => props.theme.green2};
+    color: ${props => props.color};
   }
 `;
 
-export const VerticalBar = styled.div`
+export const VerticalBar = styled.div<PropTypes>`
   width: 6px;
   border-radius: 1rem;
-  background-color: ${props => props.theme.green2};
+  background-color: ${props => props.color};
 `;

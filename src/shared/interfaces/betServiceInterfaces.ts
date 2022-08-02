@@ -16,7 +16,22 @@ export interface IBetResponse {
 }
 
 export interface IBetService{
-  getBetsData: () => Promise<IBetResponse>,
+  getBetsData: () => Promise<IAllBets[]>,
   postBetsData: ({games}: IGames) => Promise<IGames>
 }
 
+export interface IAllBets {
+  id:              number;
+  user_id:         number;
+  game_id:         number;
+  choosen_numbers: number[];
+  price:           number;
+  created_at:      Date;
+  type:            IAllBetGameType;
+}
+
+export interface IAllBetGameType {
+  id:    number;
+  type:  string;
+  color: string;
+}

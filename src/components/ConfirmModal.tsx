@@ -50,7 +50,7 @@ export function ConfirmModal(){
 			return dispatch(cartActions.deleteFromCart(id));
 
 		case ModalActionOptions.SAVE_CART:
-			const toastSaveCart = toast.loading('Fazendo seu cadastro...');
+			const toastSaveCart = toast.loading('Salvando carrinho...');
 			postBetsData(games2).then(() => {
 				toast.update(toastSaveCart, {render: 'Carrinho salvo com sucesso!', type: 'success', isLoading: false, autoClose: 2000});
 				dispatch(cartActions.clearCartValues());
