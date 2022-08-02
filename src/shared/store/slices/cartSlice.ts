@@ -5,7 +5,7 @@ const initState: InitStateType = {
 	betList: [],
 	cartTotalValue: 0,
 	firstRender: true,
-	minCartValue: 0
+	minCartValue: 0,
 };
 
 function updateCartOnLocalStorage ({betList, cartTotalValue}: UpdateCartOnLocalStorageType){

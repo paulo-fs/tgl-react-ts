@@ -1,3 +1,4 @@
+
 export interface BetList {
   id: string
   gameId: number

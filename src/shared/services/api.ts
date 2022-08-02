@@ -1,5 +1,8 @@
 import axios, { AxiosError } from 'axios';
 
+const tokenData = localStorage.getItem('@tgl-1.0:auth-data');
+const token = JSON.parse(tokenData!).token.token;
+
 const api = axios.create({
 	baseURL: 'http://localhost:3333',
 	headers: {
@@ -9,9 +12,9 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
-	const isToken = false;
+	const isToken = !!token;
 	if(isToken){
-		config.headers!.Authorization = 'Bearer' + isToken;
+		config.headers!.Authorization = `Bearer ${token}`;
 	}
 	return config;
 }, function(error: AxiosError){

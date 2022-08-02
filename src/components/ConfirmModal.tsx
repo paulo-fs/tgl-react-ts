@@ -1,9 +1,11 @@
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
-
+import { betService } from '../shared/services/Bets/betService';
 import { RootState, useAppDispatch } from '@store/store';
 import { useSelector } from 'react-redux';
 
+import { authActions } from '@store/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 import { modalActions } from '@store/slices/modalSlice';
 import { ModalActionOptions } from '@store/slices/modalActionsOptions';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
@@ -11,16 +13,25 @@ import { cartActions } from '@store/slices/cartSlice';
 
 import styled from 'styled-components';
 import { Warning } from 'phosphor-react';
-import { authActions } from '@store/slices/authSlice';
-import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
 export function ConfirmModal(){
 	const { isOpen, modalMessage, modalAction, id } = useSelector((state: RootState) => state.modal);
 	const { betList } = useSelector((state: RootState) => state.cart);
+	const { postBetsData } = betService();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+
+	const games = {
+		games: betList!.map(bet => {
+			return {game_id: bet.gameId, numbers: bet.numbers};
+		})
+	};
+
+	const games2 = {
+		games: games
+	};
 
 	function closeModal(){
 		dispatch(modalActions.closeModal());
@@ -33,11 +44,21 @@ export function ConfirmModal(){
 		case ModalActionOptions.CLEAR_GAME:
 			toast.success('Aposta limpa');
 			return dispatch(gamesInfoActions.clearGame());
+
 		case ModalActionOptions.DELETE_BET:
 			toast.success('Aposta deletada!');
 			return dispatch(cartActions.deleteFromCart(id));
+
 		case ModalActionOptions.SAVE_CART:
-			return toast.success('O carrinho foi salvo com sucesso!');
+			const toastSaveCart = toast.loading('Fazendo seu cadastro...');
+			postBetsData(games2).then(() => {
+				toast.update(toastSaveCart, {render: 'Carrinho salvo com sucesso!', type: 'success', isLoading: false, autoClose: 2000});
+			}).catch(error => {
+				toast.update(toastSaveCart, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
+				console.log(error.data);
+			});
+			return;
+
 		case ModalActionOptions.LOGOUT:
 			dispatch(authActions.logout());
 			toast.success('Até a próxima!');
