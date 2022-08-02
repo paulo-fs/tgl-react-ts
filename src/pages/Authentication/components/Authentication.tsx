@@ -1,5 +1,8 @@
-import { FormEvent, useRef } from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 import { authServices } from '../../../shared/services/Auth/authServices';
 import { useAppDispatch } from '@store/store';
@@ -9,9 +12,9 @@ import { authActions } from '@store/slices/authSlice';
 import { AuthPrimaryBtn } from '@components/Buttons/AuthPrimaryBtn';
 import { AuthSecBtn } from '@components/Buttons/AuthSecBtn';
 
-import { AuthContainer, InputContainer } from './authStyle';
+import { AuthContainer, FormikError, InputContainer } from './authStyle';
 import { ArrowRight } from 'phosphor-react';
-import { toast } from 'react-toastify';
+import { authFormInitValues, authFormValidationSchema } from './formSchemas/formSchemas';
 
 export function Authentication(){
 	const emailInput = useRef<HTMLInputElement | null>(null);
@@ -20,27 +23,26 @@ export function Authentication(){
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	async function submitHandler(event: FormEvent) {
-		const toastLoading = toast.loading(('Entrando...'));
-		event.preventDefault();
-		const bodyLogin = {
-			email: emailInput.current!.value,
-			password: passInput.current!.value,
-		};
-		login(bodyLogin)
-			.then(response => {
-				toast.update(toastLoading, {render: 'Você está logado!', type: 'success', isLoading: false, autoClose: 2000});
-				const authDataJSON = JSON.stringify(response);
-				localStorage.setItem('@tgl-1.0:auth-data', authDataJSON);
-				dispatch(authActions.login(response));
-				navigate('/bet');
-			})
-			.catch((error) => {
-				toast.update(toastLoading, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
-			});
-		emailInput.current!.value = '';
-    passInput.current!.value = '';
-	}
+	const formik = useFormik({
+		initialValues: authFormInitValues,
+		validationSchema: yup.object(authFormValidationSchema),
+		onSubmit: (values) => {
+			const toastLoading = toast.loading(('Entrando...'));
+			login(values)
+				.then(response => {
+					toast.update(toastLoading, {render: 'Você está logado!', type: 'success', isLoading: false, autoClose: 2000});
+					const authDataJSON = JSON.stringify(response);
+					localStorage.setItem('@tgl-1.0:auth-data', authDataJSON);
+					dispatch(authActions.login(response));
+					navigate('/bet');
+          emailInput.current!.value = '';
+          passInput.current!.value = '';
+				})
+				.catch((error) => {
+					toast.update(toastLoading, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
+				});
+		}
+	});
 
 	function callRegisterComponent(){
 		dispatch(uiAuthActions.toggleComponent(AuthComponentType.REGISTER_COMPONENT));
@@ -53,12 +55,38 @@ export function Authentication(){
 	return (
 		<AuthContainer>
 			<h3>Autenticação</h3>
-			<form onSubmit={submitHandler}>
+			<form onSubmit={formik.handleSubmit}>
 				<InputContainer>
-  				<input type="email" id='email' placeholder="Email" ref={emailInput} />
+  				<input
+						type="email"
+						placeholder="Email"
+						id='email'
+						ref={emailInput}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.email}
+					/>
+					{
+						formik.touched.email && formik.errors.email
+							? <FormikError>{formik.errors.email}</FormikError>
+							: null
+					}
 				</InputContainer>
 				<InputContainer>
-					<input type="password" placeholder="Senha" ref={passInput} />
+					<input
+						type="password"
+						id="password"
+						placeholder="Senha"
+						ref={passInput}
+						onBlur={formik.handleBlur}
+						onChange={formik.handleChange}
+						value={formik.values.password}
+					/>
+					{
+						formik.touched.password && formik.errors.password
+							? <FormikError>{formik.errors.password}</FormikError>
+							: null
+					}
 				</InputContainer>
 				<button
 					className='forgotPass'
@@ -66,7 +94,10 @@ export function Authentication(){
 				>
           Esqueci minha senha
 				</button>
-				<AuthPrimaryBtn type="submit">
+				<AuthPrimaryBtn
+					type="submit"
+					disabled={!!(formik.errors.email || formik.errors.password)}
+				>
           Entrar
 					<ArrowRight size={28} color='#B5C401' />
 				</AuthPrimaryBtn>
