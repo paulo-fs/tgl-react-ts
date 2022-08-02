@@ -35,11 +35,11 @@ export function AuthMainPage(){
 	return(
 		<LoginContainer>
 			<header>
-				<h2>The</h2>
-				<h2>Greatest</h2>
+				<h2>O</h2>
+				<h2>Maior</h2>
 				<h2>App</h2>
-				<p>for</p>
-				<h1>Lottery</h1>
+				<p>para</p>
+				<h1>Loteria</h1>
 			</header>
 
 			<main>

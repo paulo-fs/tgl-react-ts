@@ -21,10 +21,10 @@ export function ResetPass(){
 	async function submitHandler(event: FormEvent){
 		event.preventDefault();
 		const enteredEmail = {email: emailInput.current!.value};
-		const resPassToast = toast.loading('Please wait...');
+		const resPassToast = toast.loading('Resetando a senha...');
 		resetPass(enteredEmail)
 			.then(() => {
-				toast.update(resPassToast, {render: 'Password reseted!', type: 'success', isLoading: false, autoClose: 2000});
+				toast.update(resPassToast, {render: 'Senha resetada com sucesso!', type: 'success', isLoading: false, autoClose: 2000});
 				dispatch(authActions.logout());
 			})
 			.catch(error => {
@@ -34,19 +34,19 @@ export function ResetPass(){
 
 	return (
 		<AuthContainer>
-			<h3>Reset password</h3>
+			<h3>Resetar senha</h3>
 			<form onSubmit={submitHandler}>
 				<InputContainer>
   				<input type="email" id="email" placeholder="Email" ref={emailInput} />
 				</InputContainer>
 				<AuthPrimaryBtn type="submit">
-          Send link
+          Enviar link
 					<ArrowRight size={28} color='#B5C401' />
 				</AuthPrimaryBtn>
 			</form>
 			<AuthSecBtn onClick={callAuthComponent}>
 				<ArrowLeft size={28} />
-        Back
+        Voltar
 			</AuthSecBtn>
 		</AuthContainer>
 	);

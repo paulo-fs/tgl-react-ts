@@ -31,13 +31,13 @@ export function ConfirmModal(){
 
 		switch(modalAction){
 		case ModalActionOptions.CLEAR_GAME:
-			toast.success('Game cleared');
+			toast.success('Aposta limpa');
 			return dispatch(gamesInfoActions.clearGame());
 		case ModalActionOptions.DELETE_BET:
-			toast.success('Bet deleted!');
+			toast.success('Aposta deletada!');
 			return dispatch(cartActions.deleteFromCart(id));
 		case ModalActionOptions.SAVE_CART:
-			return toast.success('cart saved');
+			return toast.success('O carrinho foi salvo com sucesso!');
 		case ModalActionOptions.LOGOUT:
 			dispatch(authActions.logout());
 			toast.success('Até a próxima!');

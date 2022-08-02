@@ -7,16 +7,16 @@ export function BetHistory(){
 		<>
 			<HeaderHistory>
 				<div>
-					<h1>Recent Games</h1>
+					<h1>Apostas Recentes</h1>
 					<nav>
-						<p>Filters</p>
+						<p>Filtrar</p>
 						<BetButton>Lotofácil</BetButton>
 						<BetButton>Mega-Sena</BetButton>
 						<BetButton>Lotomania</BetButton>
 					</nav>
 				</div>
 				<NewBetBtn>
-          New Bet
+          Nova aposta
 					<ArrowRight size={24} color='#B5C401' />
 				</NewBetBtn>
 			</HeaderHistory>

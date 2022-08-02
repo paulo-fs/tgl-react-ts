@@ -42,12 +42,12 @@ export function Bet(){
 			<BetContainer>
 				<HeaderContainer>
 					<h1>
-            New Bet <span>for {selectedGame?.type}</span>
+            Nova aposta <span>para {selectedGame?.type}</span>
 					</h1>
 				</HeaderContainer>
 
 				<ChooseAGame>
-					<h2>Choose a game</h2>
+					<h2>Escolha um jogo</h2>
 					<nav>
 						{games.map((game: GamesDataTypes) => {
 							const selected = (game.id === selectedGame!.id);
@@ -65,7 +65,7 @@ export function Bet(){
 
 				<main>
 					<div>
-						<h3>Fill your bet</h3>
+						<h3>Preencha sua aposta</h3>
 						<p>
 							{selectedGame?.description}
 						</p>

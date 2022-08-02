@@ -19,10 +19,10 @@ export function Header(){
 			<div>
 				<Logo>TGL</Logo>
 				<Links>
-					<button>Home</button>
+					<button>Início</button>
 					<div>
-						<button>Account</button>
-						<button onClick={logoutHandler}>Log out <ArrowRight size={20} /></button>
+						<button>Conta</button>
+						<button onClick={logoutHandler}>Sair <ArrowRight size={20} /></button>
 					</div>
 				</Links>
 			</div>

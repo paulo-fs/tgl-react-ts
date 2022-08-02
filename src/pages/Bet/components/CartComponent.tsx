@@ -31,7 +31,7 @@ export function CartComponent(){
 
 	return (
 		<CartContainer>
-			<h2>Cart
+			<h2>Carrinho
 				{betList!.length > 0 &&
           <span>
             ({ betList?.length } { betList!.length === 1 ? 'item' : 'items'})
@@ -42,7 +42,7 @@ export function CartComponent(){
 				<div className='cartContent'>
 
 					{ betList!.length === 0 &&
-            <EmptyCart>The cart is empty, <br/>make a bet!</EmptyCart>}
+            <EmptyCart>O carrinho está vazio, <br/>faça uma aposta!</EmptyCart>}
 					{ betList!.length > 0 && betList?.map(bet => (
 						<CartItem key={bet.id} bet={bet} />
 					))}
@@ -53,16 +53,16 @@ export function CartComponent(){
 			<CartFooter>
 				<div>
 					<p>
-            Cart
+
 						<span> Total: R${moneyValueConverter(cartTotalValue)}</span>
 					</p>
 					<span className='minCartValue'>
-            Minimum cart value: R${moneyValueConverter(minCartValue)}
+            Valor mínimo do carrinho: R${moneyValueConverter(minCartValue)}
 					</span>
 				</div>
 				<div className='save'>
 					<button onClick={saveCartHandler}>
-              Save
+              Salvar
 						<ArrowRight color='#27C383'/>
 					</button>
 				</div>

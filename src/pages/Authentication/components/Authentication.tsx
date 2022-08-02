@@ -21,7 +21,7 @@ export function Authentication(){
 	const navigate = useNavigate();
 
 	async function submitHandler(event: FormEvent) {
-		const toastLoading = toast.loading(('Please wait...'));
+		const toastLoading = toast.loading(('Entrando...'));
 		event.preventDefault();
 		const bodyLogin = {
 			email: emailInput.current!.value,
@@ -29,7 +29,7 @@ export function Authentication(){
 		};
 		login(bodyLogin)
 			.then(response => {
-				toast.update(toastLoading, {render: 'Login successfully!', type: 'success', isLoading: false, autoClose: 2000});
+				toast.update(toastLoading, {render: 'Você está logado!', type: 'success', isLoading: false, autoClose: 2000});
 				const authDataJSON = JSON.stringify(response);
 				localStorage.setItem('@tgl-1.0:auth-data', authDataJSON);
 				dispatch(authActions.login(response));
@@ -52,27 +52,27 @@ export function Authentication(){
 
 	return (
 		<AuthContainer>
-			<h3>Authentication</h3>
+			<h3>Autenticação</h3>
 			<form onSubmit={submitHandler}>
 				<InputContainer>
   				<input type="email" id='email' placeholder="Email" ref={emailInput} />
 				</InputContainer>
 				<InputContainer>
-					<input type="password" placeholder="Password" ref={passInput} />
+					<input type="password" placeholder="Senha" ref={passInput} />
 				</InputContainer>
 				<button
 					className='forgotPass'
 					onClick={callResetPassComponent}
 				>
-          I forgot my password
+          Esqueci minha senha
 				</button>
 				<AuthPrimaryBtn type="submit">
-          Log In
+          Entrar
 					<ArrowRight size={28} color='#B5C401' />
 				</AuthPrimaryBtn>
 			</form>
 			<AuthSecBtn onClick={callRegisterComponent}>
-        Sign Up
+        Cadastrar
 				<ArrowRight size={28} />
 			</AuthSecBtn>
 		</AuthContainer>

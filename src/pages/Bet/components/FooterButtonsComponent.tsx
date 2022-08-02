@@ -36,24 +36,24 @@ export function FooterButtonsComponent(){
 			color: selectedGame.color,
 		};
 		if(missing !== 0){
-			const message = `Choose more ${missing} ${missing === 1 ? 'number' : 'numbers'} to complete this bet!`;
+			const message = `Escolha mais ${missing} ${missing === 1 ? 'número' : 'números'} para completar a aposta!`;
 			toast.warn(message);
 			return;
 		}
 		dispatch(cartActions.addToCart(gameToBeAdd));
 		dispatch(gamesInfoActions.clearGame());
-		toast.success('Bet added!');
+		toast.success('Aposta adicionada ao carrinho!');
 	}
 
 	return (
 		<FooterButtons>
 			<div>
-				<SecBtn onClick={completeGame}>Complete game</SecBtn>
-				<SecBtn onClick={clearGame}>Clear game</SecBtn>
+				<SecBtn onClick={completeGame}>Completar jogo</SecBtn>
+				<SecBtn onClick={clearGame}>Limpar jogo</SecBtn>
 			</div>
 			<AddToCart onClick={addToCart}>
 				<ShoppingCartSimple size={24} color="#fff" />
-            Add to cart
+            Adicionar ao carrinho
 			</AddToCart>
 		</FooterButtons>
 	);

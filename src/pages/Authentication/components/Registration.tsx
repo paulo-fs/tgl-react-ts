@@ -28,12 +28,12 @@ export function Registration(){
 			email: emailInput.current!.value,
 			password: passInput.current!.value
 		};
-		const toastResponse = toast.loading('Please wait...');
+		const toastResponse = toast.loading('Fazendo seu cadastro...');
 
 		register(body)
 			.then(() => {
 				navigate('/');
-				toast.update(toastResponse, {render: 'Registered successfully!', type: 'success', isLoading: false, autoClose: 2000});
+				toast.update(toastResponse, {render: 'Cadastro realizado com sucesso!', type: 'success', isLoading: false, autoClose: 2000});
 			})
 			.catch(error => {
 				toast.update(toastResponse, {render: error.data.error.message, type: 'error', isLoading: false, autoClose: 2000});
@@ -42,25 +42,25 @@ export function Registration(){
 
 	return (
 		<AuthContainer>
-			<h3>Registration</h3>
+			<h3>Cadastrar</h3>
 			<form>
 				<InputContainer>
-  				<input type="text" placeholder="Name" ref={nameInput} />
+  				<input type="text" placeholder="Nome" ref={nameInput} />
 				</InputContainer>
 				<InputContainer>
   				<input type="email" placeholder="Email" ref={emailInput} />
 				</InputContainer>
 				<InputContainer>
-					<input type="password" placeholder="Password" ref={passInput} />
+					<input type="password" placeholder="Senha" ref={passInput} />
 				</InputContainer>
 				<AuthPrimaryBtn type="submit" onClick={submitHandler}>
-          Register
+          Cadastrar
 					<ArrowRight size={28} color='#B5C401' />
 				</AuthPrimaryBtn>
 			</form>
 			<AuthSecBtn onClick={callAuthComponent}>
 				<ArrowLeft size={28} />
-        Back
+        Voltar
 			</AuthSecBtn>
 		</AuthContainer>
 	);
