@@ -43,7 +43,7 @@ export const Links = styled.nav`
     gap: 2.5rem;
   }
 
-  button{
+  button, a{
     font-size: 1.25rem;
     font-weight: bold;
     border: none;

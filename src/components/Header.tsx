@@ -3,6 +3,7 @@ import { ArrowRight } from 'phosphor-react';
 import { useAppDispatch } from '@store/store';
 import { modalActions } from '@store/slices/modalSlice';
 import { ModalActionOptions } from '@store/slices/modalActionsOptions';
+import { Link } from 'react-router-dom';
 
 export function Header(){
 	const dispatch = useAppDispatch();
@@ -19,7 +20,7 @@ export function Header(){
 			<div>
 				<Logo>TGL</Logo>
 				<Links>
-					<button>Início</button>
+					<Link to='/bet/history'>Apostas Salvas</Link>
 					<div>
 						<button>Conta</button>
 						<button onClick={logoutHandler}>Sair <ArrowRight size={20} /></button>
