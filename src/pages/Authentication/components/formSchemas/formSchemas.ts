@@ -28,3 +28,22 @@ export const authFormValidationSchema = {
 		.required('O campo de senha é obrigatório')
 };
 
+export const regFormInitValues = {
+	name: '',
+	email: '',
+	password: ''
+};
+
+export const regFormValidationSchema = {
+	name: yup
+		.string()
+		.required('O campo de nome é obrigatório!'),
+	email: yup
+		.string()
+		.email('Email inválido!')
+		.required('O campo de email é obrigatório!'),
+	password: yup
+		.string()
+		.min(6, 'A senha precisa ter pelo menos 6 dígitos!')
+		.required('O campo de senha é obrigatório')
+};
