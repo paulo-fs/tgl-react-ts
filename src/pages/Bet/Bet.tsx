@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '@store/store';
+import { toast } from 'react-toastify';
 
 import { BetButton } from '@components/Buttons/BetButton';
 import { CartComponent } from './components/CartComponent';
@@ -21,10 +22,15 @@ export function Bet(){
 	const { games, selectedGame, incompleteBet } = useSelector((state: RootState) => state.gamesInfo);
 
  	useEffect(() => {
+		const toastGetGameData = toast.loading('Carregando dados...');
 		getGamesData()
 			.then(response => {
 				dispatch(gamesInfoActions.storeGamesInfo(response.types));
 				dispatch(cartActions.storeMinCartValue(response.min_cart_value));
+				toast.update(toastGetGameData, {render: 'Dados carregados!', type: 'success', isLoading: false, autoClose: 2000});
+			})
+			.catch(error => {
+				toast.update(toastGetGameData, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
 			});
 	}, []);
 

@@ -32,8 +32,8 @@ export function BetHistory(){
 	useEffect(() => {
 		const toastGetSavedBets = toast.loading('Carregando dados...');
 		getBetsData().then(response => {
-			toast.update(toastGetSavedBets, {render: 'Dados carregados!', type: 'success', isLoading: false, autoClose: 2000});
 			dispatch(betHistoryActions.storeBetHistory(response));
+			toast.update(toastGetSavedBets, {render: 'Dados carregados!', type: 'success', isLoading: false, autoClose: 2000});
 		}).catch(error => {
 			toast.update(toastGetSavedBets, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
 		});
