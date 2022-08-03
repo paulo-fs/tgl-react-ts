@@ -7,10 +7,10 @@ import { betService } from '../../shared/services/Bets/betService';
 import { RootState, useAppDispatch } from '@store/store';
 import { moneyValueConverter } from '@pages/Bet/components/CartComponent';
 import { betHistoryActions } from '@store/slices/betHistorySlice';
+import { BetButton } from '@components/Buttons/BetButton';
 
 import { EmptyBetList, HeaderHistory, HistoryItem, MainHistory, VerticalBar } from './betHistoryStyles';
 import { ArrowRight } from 'phosphor-react';
-import { BetButton } from '@components/Buttons/BetButton';
 
 export function BetHistory(){
 	const { getBetsData } = betService();

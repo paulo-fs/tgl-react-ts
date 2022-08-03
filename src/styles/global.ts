@@ -57,4 +57,16 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #F7F7F7;
     position: relative;
   }
+
+  @media (max-width: 768px){
+    :root{
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px){
+    :root{
+      font-size: 13px;
+    }
+  }
 `;

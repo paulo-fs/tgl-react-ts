@@ -8,6 +8,21 @@ export const BetPageContainer = styled.div`
   display: flex;
   gap:  2.5rem;
   justify-content: space-between;
+
+  @media (max-width: 768px){
+    max-width: 768px;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px){
+    width: 100%;
+    flex-direction: column-reverse;
+    gap: 4rem;
+
+    aside{
+      width: 100%;
+    }
+  }
 `;
 
 export const BetContainer = styled.div`
@@ -15,6 +30,16 @@ export const BetContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @media (max-width: 480px){
+    h3{
+      font-size: 1.5rem;
+    }
+
+    p{
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const HeaderContainer = styled.header`
@@ -24,6 +49,12 @@ export const HeaderContainer = styled.header`
 
     span{
       font-weight: lighter;
+    }
+  }
+
+  @media (max-width: 480px){
+    h1{
+      font-size: 1.8rem;
     }
   }
 `;
@@ -38,6 +69,16 @@ export const ChooseAGame = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+  }
+
+  @media (max-width: 480px){
+    h2{
+      font-size: 1.5rem;
+    }
+
+    nav{
+      justify-content: space-between;
+    }
   }
 `;
 

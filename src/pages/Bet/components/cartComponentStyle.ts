@@ -31,6 +31,22 @@ h2{
     text-transform: none;
   }
 }
+
+@media (max-width: 480px){
+  width: 100%;
+  max-width: 100%;
+  position: initial;
+
+  h2{
+    font-size: 1.8rem;
+    padding: 1rem 1.2rem 0.5rem;
+
+    span{
+      font-size: 1.3rem;
+      margin-left: 1.5rem;
+    }
+  }
+}
 `;
 
 export const CartContent = styled.div`
@@ -43,11 +59,24 @@ overflow-y: auto;
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
+
+@media (max-width: 480px){
+  padding: 0rem 1.2rem 1rem;
+
+  .cartContent{
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+}
 `;
 
 export const EmptyCart = styled.p`
   color: ${props => props.theme.green2};
   font-size: 1.5rem;
+
+  @media (max-width: 480px){
+    font-size: 1.9rem;
+  }
 `;
 
 export const CartFooter = styled.div`
@@ -75,7 +104,6 @@ div{
   }
 }
 
-
 .save{
   width: 100%;
   padding: 1.5rem;
@@ -97,6 +125,28 @@ div{
     transition: .2s;
     &:hover{
       opacity: .5;
+    }
+  }
+}
+
+@media (max-width: 480px){
+  div{
+    p{
+      padding: 2rem 1rem;
+      font-size: 1.7rem;
+    }
+
+    .minCartValue{
+      bottom: 0.5rem;
+      left: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .save{
+    button{
+      font-size: 2.5rem;
+      padding: 0.5rem 7rem;
     }
   }
 }

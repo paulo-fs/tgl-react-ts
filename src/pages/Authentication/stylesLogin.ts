@@ -35,4 +35,39 @@ export const LoginContainer = styled.div`
     display: flex;
     margin-left: 6rem;
   }
+
+  @media (max-width: 480px){
+    width: 100%;
+    height: 100%;
+    padding: 1rem 4rem 3rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    header{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: -2rem 3rem 2rem;
+
+      h1{
+        font-size: 3rem;
+      }
+
+      h2{
+        font-size: 2.5rem;
+      }
+
+      p{
+        width: 100%;
+        margin: 0.2rem 0;
+      }
+    }
+
+    main{
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
 `;

@@ -35,6 +35,12 @@ export const AuthContainer = styled.div`
       color: ${props => props.theme.gray700};
     }
   }
+
+  @media (max-width: 480px){
+    .forgotPass{
+      font-size: 1.3rem;
+    }
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -54,6 +60,15 @@ export const InputContainer = styled.div`
     &::placeholder{
       color: ${props => props.theme.gray500};
       font-weight: bold;
+    }
+  }
+
+  @media (max-width: 480px){
+    padding: 1.2rem 1rem;
+    input{
+      width: 100%;
+      padding: .7rem;
+      font-size: 1.2rem;
     }
   }
 `;

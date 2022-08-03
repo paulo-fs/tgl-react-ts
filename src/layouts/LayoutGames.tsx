@@ -20,6 +20,10 @@ export function LayoutGames(){
 const ContentContainer = styled.div`
   width: 100%;
   padding: 2.5rem 8.8rem;
+
+  @media (max-width: 768px){
+    padding: 1rem 1.5rem;
+  }
 `;
 
 const LayoutContainer = styled.div`

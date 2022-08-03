@@ -32,4 +32,9 @@ export const BtnNumber = styled.button<StatusProp>`
   &:hover{
     background-color: ${props => props.theme.gray900};
   }
+
+  @media (max-width: 480px){
+    font-size: 1.4rem;
+    padding: 1.0rem 1.1rem;
+  }
 `;

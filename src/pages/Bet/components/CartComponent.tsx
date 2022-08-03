@@ -66,7 +66,6 @@ export function CartComponent(){
 			<CartFooter>
 				<div>
 					<p>
-
 						<span> Total: R${moneyValueConverter(cartTotalValue)}</span>
 					</p>
 					<span className='minCartValue'>

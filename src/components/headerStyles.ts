@@ -12,6 +12,10 @@ export const HeaderContainer = styled.header`
     align-items: center;
     gap: 4.5rem;
   }
+
+  @media (max-width: 768px){
+    padding: .4rem 1.5rem .4rem;
+  }
 `;
 
 export const Logo  = styled.h1`

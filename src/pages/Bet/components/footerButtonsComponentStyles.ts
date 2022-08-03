@@ -10,6 +10,16 @@ div{
   display: flex;
   gap: 1rem;
 }
+
+@media (max-width: 480px){
+ flex-direction: column;
+ gap: 1.2rem;
+
+ div{
+  width: 100%;
+  justify-content: stretch;
+ }
+}
 `;
 
 export const BaseButton = styled.button`
@@ -21,6 +31,12 @@ padding: 1rem 1.5rem;
 display: flex;
 align-items: center;
 gap: 1rem;
+
+@media (max-width: 480px){
+  width: 100%;
+  justify-content: center;
+  font-size: 1.2rem;
+}
 `;
 
 export const SecBtn = styled(BaseButton)`

@@ -11,6 +11,11 @@ cursor: pointer;
 &:hover{
   opacity: .7;
 }
+
+@media (max-width: 480px){
+  font-size: 3rem;
+  padding: 0 1rem;
+}
 `;
 
 export const CartItemContainer = styled.div<PropType>`
@@ -42,6 +47,21 @@ gap: .7rem;
       font-style: normal;
       font-weight: lighter;
       margin-left: .5rem;
+    }
+  }
+}
+
+@media (max-width: 480px){
+  width: 100%;
+  gap: 1rem;
+
+  .cartInfos{
+    p{
+      font-size: 1.1rem;
+    }
+
+    h4{
+      font-size: 1.3rem;
     }
   }
 }

@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '@store/store';
 
 import { BetButton } from '@components/Buttons/BetButton';
 import { CartComponent } from './components/CartComponent';
 import { FooterButtonsComponent } from './components/FooterButtonsComponent';
 import { BetNumbersComponent } from './components/BetNumbersComponent';
 
-import { BetContainer, BetPageContainer, ChooseAGame, HeaderContainer } from './betStyles';
 import { gamesServices } from '../../shared/services/Games/gamesServices';
 import { GamesDataTypes } from '@interfaces/gamesServicesInterface';
-
-import { RootState, useAppDispatch } from '@store/store';
 import { gamesInfoActions } from '@store/slices/gamesSlice';
-import { useSelector } from 'react-redux';
 import { cartActions } from '@store/slices/cartSlice';
+
+import { BetContainer, BetPageContainer, ChooseAGame, HeaderContainer } from './betStyles';
 
 export function Bet(){
 	const { getGamesData } = gamesServices();
