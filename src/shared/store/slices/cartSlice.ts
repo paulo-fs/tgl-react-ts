@@ -5,6 +5,7 @@ const initState: InitStateType = {
 	betList: [],
 	cartTotalValue: 0,
 	minCartValue: 0,
+	mobileDisplay: false
 };
 
 function updateCartOnLocalStorage ({betList, cartTotalValue}: UpdateCartOnLocalStorageType){
@@ -71,6 +72,10 @@ const cartSlice = createSlice({
 			localStorage.removeItem('@tgl-1.0:cart-data');
 			state.betList = [];
 			state.cartTotalValue = 0;
+		},
+
+		changeMobileDisplay(state){
+			state.mobileDisplay = !state.mobileDisplay;
 		}
 	}
 });

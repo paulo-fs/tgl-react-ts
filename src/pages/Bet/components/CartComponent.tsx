@@ -17,7 +17,7 @@ let firstRender = true;
 
 export function CartComponent(){
 	const dispatch = useAppDispatch();
-	const { betList, cartTotalValue, minCartValue } = useSelector((state: RootState) => state.cart);
+	const { betList, cartTotalValue, minCartValue, mobileDisplay } = useSelector((state: RootState) => state.cart);
 
 	useEffect(() => {
 	  if(firstRender){
@@ -43,7 +43,7 @@ export function CartComponent(){
 	}
 
 	return (
-		<CartContainer>
+		<CartContainer onClick={() => dispatch(cartActions.changeMobileDisplay())}>
 			<h2>Carrinho
 				{betList!.length > 0 &&
           <span>
@@ -51,7 +51,7 @@ export function CartComponent(){
           </span>
 				}
 			</h2>
-			<CartContent>
+			<CartContent mobileDisplay={mobileDisplay}>
 				<div className='cartContent'>
 
 					{ betList!.length === 0 &&
@@ -63,7 +63,7 @@ export function CartComponent(){
 				</div>
 			</CartContent>
 
-			<CartFooter>
+			<CartFooter mobileDisplay={mobileDisplay}>
 				<div>
 					<p>
 						<span> Total: R${moneyValueConverter(cartTotalValue)}</span>

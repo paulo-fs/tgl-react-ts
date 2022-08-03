@@ -12,6 +12,7 @@ export interface InitStateType {
   betList: BetList[] | null
   cartTotalValue: number
   minCartValue: number
+  mobileDisplay: boolean
 }
 
 export interface addToCartPayloadType {

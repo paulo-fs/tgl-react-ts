@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface CartPropsType{
+  mobileDisplay: boolean
+}
+
 export const CartContainer = styled.aside`
 flex: 1;
 min-width: 19rem;
@@ -35,7 +39,8 @@ h2{
 @media (max-width: 480px){
   width: 100%;
   max-width: 100%;
-  position: initial;
+  position: sticky;
+  top: 3rem;
 
   h2{
     font-size: 1.8rem;
@@ -46,10 +51,20 @@ h2{
       margin-left: 1.5rem;
     }
   }
+
+  &::after{
+    content: 'Clique para expandir ou encolher o carrinho.';
+    position: absolute;
+    bottom: -2rem;
+
+    background-color: ${props => props.theme.gray100};
+    width: 100%;
+    padding: .2rem;
+  }
 }
 `;
 
-export const CartContent = styled.div`
+export const CartContent = styled.div<CartPropsType>`
 padding: 1rem 1.4rem 2rem;
 overflow-y: auto;
 
@@ -61,6 +76,10 @@ overflow-y: auto;
 }
 
 @media (max-width: 480px){
+  display: ${props => props.mobileDisplay
+		? 'initial'
+		: 'none'
+};
   padding: 0rem 1.2rem 1rem;
 
   .cartContent{
@@ -79,7 +98,7 @@ export const EmptyCart = styled.p`
   }
 `;
 
-export const CartFooter = styled.div`
+export const CartFooter = styled.div<CartPropsType>`
 div{
   position: relative;
 
@@ -130,6 +149,11 @@ div{
 }
 
 @media (max-width: 480px){
+  display: ${props => props.mobileDisplay
+		? 'initial'
+		: 'none'
+};
+
   div{
     p{
       padding: 2rem 1rem;
