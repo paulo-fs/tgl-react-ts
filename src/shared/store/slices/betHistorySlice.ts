@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface InitState {
   savedBets: IAllBets[]
-  selectedGames: number[]
+  selectedGames: string[]
 }
 
 const initState: InitState = {
@@ -19,7 +19,15 @@ const betHistorySlice = createSlice({
 			state.savedBets = action.payload;
 		},
 
-		handleSelectedGames(state, action: PayloadAction<number>){
+		// handleSelectedGames(state, action: PayloadAction<number>){
+		// 	const id = action.payload;
+		// 	const index = state.selectedGames.indexOf(id);
+		// 	state.selectedGames.includes(id)
+		// 		? state.selectedGames.splice(index, 1)
+		// 		: state.selectedGames.push(id);
+		// },
+
+		handleSelectedGames(state, action: PayloadAction<string>){
 			const id = action.payload;
 			const index = state.selectedGames.indexOf(id);
 			state.selectedGames.includes(id)

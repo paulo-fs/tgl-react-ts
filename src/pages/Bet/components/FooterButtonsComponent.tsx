@@ -16,8 +16,8 @@ export function FooterButtonsComponent(){
 
 	function clearGame(){
 		const modalData = {
-			message: 'Tem certeza que deseja limpar o jogo?',
-			action: ModalActionOptions.CLEAR_GAME
+			message: `Tem certeza que deseja limpar este jogo (${selectedGame.type})?`,
+			action: ModalActionOptions.CLEAR_GAME,
 		};
 		dispatch(modalActions.showModal(modalData));
 	}

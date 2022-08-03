@@ -18,6 +18,7 @@ export interface IBetResponse {
 export interface IBetService{
   getBetsData: () => Promise<IAllBets[]>,
   postBetsData: ({games}: IGames) => Promise<IGames>
+  getFilteredBets: (params: string[]) => Promise<IAllBets[]>
 }
 
 export interface IAllBets {
@@ -34,4 +35,8 @@ export interface IAllBetGameType {
   id:    number;
   type:  string;
   color: string;
+}
+
+export interface IGetFilteredBetsBody {
+  params: string[]
 }

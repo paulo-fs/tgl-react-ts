@@ -7,6 +7,7 @@ import { RootState, useAppDispatch } from '@store/store';
 import { Authentication } from './components/Authentication';
 import { Registration } from './components/Registration';
 import { ResetPass } from './components/ResetPass';
+import { ChangePass } from './components/ChangePass';
 
 import { LoginContainer } from './stylesLogin';
 
@@ -27,6 +28,8 @@ export function AuthMainPage(){
 			return <Registration />;
 		case AuthComponentType.RESET_PASSWORD_COMPONENT:
 			return <ResetPass />;
+		case AuthComponentType.CHANGE_PASS:
+			return <ChangePass />;
 		default:
 			return;
 		}

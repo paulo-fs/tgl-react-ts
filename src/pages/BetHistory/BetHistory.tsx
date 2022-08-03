@@ -13,34 +13,47 @@ import { EmptyBetList, HeaderHistory, HistoryItem, MainHistory, VerticalBar } fr
 import { ArrowRight } from 'phosphor-react';
 
 export function BetHistory(){
-	const { getBetsData } = betService();
+	const { getFilteredBets } = betService();
 	const dispatch = useAppDispatch();
 	const { savedBets, selectedGames } = useSelector((state: RootState) => state.betHistory);
 	const { games } = useSelector((state: RootState) => state.gamesInfo);
 
 	const filteredBets = savedBets.filter(bet => {
-		if(selectedGames.includes(bet.game_id)){
+		if(selectedGames.includes(bet.type.type)){
 			return bet;
 		}
 	});
 
-	const selectedBetList = filteredBets.length > 0
-		? filteredBets
-		: savedBets;
+	let selectedBetList;
 
+	selectedGames.length === 0
+		? selectedBetList = savedBets
+		: selectedBetList = filteredBets;
+
+
+	// useEffect(() => {
+	// 	const toastGetSavedBets = toast.loading('Carregando dados...');
+	// 	getBetsData().then(response => {
+	// 		dispatch(betHistoryActions.storeBetHistory(response));
+	// 		toast.update(toastGetSavedBets, {render: 'Dados carregados!', type: 'success', isLoading: false, autoClose: 2000});
+	// 	}).catch(error => {
+	// 		toast.update(toastGetSavedBets, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
+	// 	});
+	// }, []);
 
 	useEffect(() => {
 		const toastGetSavedBets = toast.loading('Carregando dados...');
-		getBetsData().then(response => {
+		getFilteredBets(selectedGames).then(response => {
 			dispatch(betHistoryActions.storeBetHistory(response));
 			toast.update(toastGetSavedBets, {render: 'Dados carregados!', type: 'success', isLoading: false, autoClose: 2000});
 		}).catch(error => {
 			toast.update(toastGetSavedBets, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
 		});
-	}, []);
+	}, [selectedGames]);
 
 	function formatBetNumbers(betNumbers: number[]){
 		const numbers = String(betNumbers).split(',');
+		numbers.sort((a, b) => Number(a) - Number(b));
 		return numbers.map(number => (
 			+number < 10
 				? '0' + String(number)
@@ -65,13 +78,13 @@ export function BetHistory(){
 						<p>Filtrar</p>
 						{
 							games.map(bet => {
-								const isSelected = selectedGames.includes(bet.id);
+								const isSelected = selectedGames.includes(bet.type);
 								return (
 									<BetButton
 										key={bet.id}
 										color={bet.color}
 										isSelected={isSelected}
-										onClick={() => dispatch(betHistoryActions.handleSelectedGames(bet.id))}
+										onClick={() => dispatch(betHistoryActions.handleSelectedGames(bet.type))}
 									>
 										{bet.type}
 									</BetButton>
@@ -86,11 +99,18 @@ export function BetHistory(){
 				</Link>
 			</HeaderHistory>
 
-			{ selectedBetList.length === 0 &&
+			{ savedBets.length === 0 &&
         <EmptyBetList>
         	<h3>Você ainda não tem apostas salvas,</h3>
         	<h1>Faça suas apostas!</h1>
         </EmptyBetList>
+			}
+
+			{
+				selectedBetList.length === 0 &&
+          <EmptyBetList>
+          	<h3>Você ainda não tem apostas deste tipo!</h3>
+          </EmptyBetList>
 			}
 
 			{ selectedBetList.length > 0 &&

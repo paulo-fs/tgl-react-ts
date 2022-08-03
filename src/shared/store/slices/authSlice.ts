@@ -1,16 +1,21 @@
 import { ILoginResponse, Token, User } from '@interfaces/authInterfaces';
+import { IResetPassResponse } from '@interfaces/resetPassInterface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface InitStateType {
   isAuthenticated: boolean,
   token: Token | undefined
   user: User | undefined
+  resetPassToken: string
+  email: string
 }
 
 const initState: InitStateType = {
 	isAuthenticated: false,
 	token: undefined,
-	user: undefined
+	user: undefined,
+	resetPassToken: '',
+	email: ''
 };
 
 const authSlice = createSlice({
@@ -27,8 +32,17 @@ const authSlice = createSlice({
 			state.isAuthenticated = false;
 			state.token = undefined;
 			state.user = undefined;
+			state.resetPassToken = '';
+			state.email = '';
 			localStorage.removeItem('@tgl-1.0:auth-data');
 		},
+
+		resetPass(state, action: PayloadAction<IResetPassResponse>){
+			state.isAuthenticated = false;
+			state.token = undefined;
+			state.resetPassToken = action.payload.token;
+			state.email = action.payload.email;
+		}
 	}
 });
 

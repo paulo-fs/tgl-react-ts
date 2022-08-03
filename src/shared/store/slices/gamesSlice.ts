@@ -1,5 +1,6 @@
 import { BetType, GameTypes, selectGamePropTypes } from '@interfaces/gameSliceInterfaces';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { GamesDataTypes } from '../../interfaces/gamesServicesInterface';
 
 const selectedGame: GameTypes = {
@@ -72,7 +73,7 @@ const gamesSlice = createSlice({
 			} else{
 				index !== -1
 					? state.selectedGame.betNumbers.splice(index, 1)
-					: '';
+					: toast.error('Você já selecionou a quantidade máxima de números para este tipo de jogo.');
 			}
 		},
 

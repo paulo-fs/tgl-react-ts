@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { resetPassService } from '../../../shared/services/Auth/resetPassService';
-import { useAppDispatch } from '@store/store';
+import { changePassServices } from '../../../shared/services/Auth/changePassService';
+import { RootState, useAppDispatch } from '@store/store';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -13,25 +13,32 @@ import { authActions } from '@store/slices/authSlice';
 
 import { AuthContainer, FormikError, InputContainer } from './authStyle';
 import { ArrowLeft, ArrowRight } from 'phosphor-react';
-import { resetPassFormInitValues, resetPassFormValidationSchema } from './formSchemas/formSchemas';
+import { changePassFormInitValues, changePassFormValidationSchema } from './formSchemas/formSchemas';
+import { useSelector } from 'react-redux';
 
-export function ResetPass(){
-	const emailInput = useRef<HTMLInputElement | null>(null);
-	const { resetPass } = resetPassService();
+export function ChangePass(){
+	const passwordInput = useRef<HTMLInputElement | null>(null);
+	const { resetPassToken, email } = useSelector((state: RootState) => state.auth);
+	const { changePassword } = changePassServices();
 	const dispatch = useAppDispatch();
 
 	const formik = useFormik({
-		initialValues: resetPassFormInitValues,
-		validationSchema: yup.object(resetPassFormValidationSchema),
+		initialValues: changePassFormInitValues,
+		validationSchema: yup.object(changePassFormValidationSchema),
 
 		onSubmit: (values) => {
 			const resPassToast = toast.loading('Resetando a senha...');
-			resetPass(values)
+			const bodyReq = {
+				password: {email: email, password: values.password},
+				token: resetPassToken
+			};
+			changePassword(bodyReq)
 				.then((response) => {
-					callChangePassComponent();
 					toast.update(resPassToast, {render: 'Senha resetada com sucesso!', type: 'success', isLoading: false, autoClose: 2000});
-					dispatch(authActions.resetPass(response));
-					emailInput.current!.value = '';
+					dispatch(authActions.logout());
+					passwordInput.current!.value = '';
+					console.log(response);
+					callAuthComponent();
 				})
 				.catch(error => {
 					toast.update(resPassToast, {render: error.data.message, type: 'error', isLoading: false, autoClose: 2000});
@@ -43,35 +50,31 @@ export function ResetPass(){
 		dispatch(uiAuthActions.toggleComponent(AuthComponentType.LOGIN_COMPONENT));
 	}
 
-	function callChangePassComponent(){
-		dispatch(uiAuthActions.toggleComponent(AuthComponentType.CHANGE_PASS));
-	}
-
 	return (
 		<AuthContainer>
-			<h3>Resetar senha</h3>
+			<h3>Alterar a senha</h3>
 			<form onSubmit={formik.handleSubmit}>
 				<InputContainer>
   				<input
-						type="email"
-						id="email"
-						placeholder="Email"
-						ref={emailInput}
+						type="password"
+						id="password"
+						placeholder="Digite a nova senha"
+						ref={passwordInput}
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
-						value={formik.values.email}
+						value={formik.values.password}
 					/>
 					{
-						formik.touched.email && formik.errors.email
-							? <FormikError>{formik.errors.email}</FormikError>
+						formik.touched.password && formik.errors.password
+							? <FormikError>{formik.errors.password}</FormikError>
 							: null
 					}
 				</InputContainer>
 				<AuthPrimaryBtn
 					type="submit"
-					disabled={!!formik.errors.email}
+					disabled={!!formik.errors.password}
 				>
-          Enviar link
+          Alterar a senha
 					<ArrowRight size={28} color='#B5C401' />
 				</AuthPrimaryBtn>
 			</form>

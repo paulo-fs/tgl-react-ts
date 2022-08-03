@@ -2,10 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { LayoutAuth } from '@layouts/LayoutAuth';
 import { LayoutGames } from '@layouts/LayoutGames';
+import { BetHistory, AuthMainPage, Bet } from '@pages/index';
 
-import { AuthMainPage } from '@pages/Authentication/AuthMainPage';
-import { Bet } from '@pages/Bet/Bet';
-import { BetHistory } from '@pages/BetHistory/BetHistory';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 

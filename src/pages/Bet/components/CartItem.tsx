@@ -19,7 +19,9 @@ export function CartItem({ bet }: PropType){
 	const dispatch = useAppDispatch();
 
 	function formatBetNumbers(betNumbers: number[]){
-		return betNumbers.map(number => (
+		const orderedNumbers = [...betNumbers];
+		orderedNumbers.sort((a, b) => a - b );
+		return orderedNumbers.map(number => (
 			number < 10
 				? '0' + String(number)
 				: String(number)
@@ -28,7 +30,7 @@ export function CartItem({ bet }: PropType){
 
 	function deleteHundler(){
 		const modalData = {
-			message: 'Você está certo de que deseja excluir esta aposta?',
+			message: `Você está certo de que deseja excluir esta aposta (${type})?`,
 			action: ModalActionOptions.DELETE_BET,
 			id: id
 		};

@@ -11,6 +11,17 @@ export const resetPassFormValidationSchema = {
 		.required('O campo de email é obrigatório!')
 };
 
+export const changePassFormInitValues = {
+	password: ''
+};
+
+export const changePassFormValidationSchema = {
+	password: yup
+		.string()
+		.min(6, 'A senha precisa ter pelo menos 6 caracteres')
+		.required('O campo de senha é obrigatório')
+};
+
 
 export const authFormInitValues = {
 	email: '',

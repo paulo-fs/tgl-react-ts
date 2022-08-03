@@ -10,5 +10,9 @@ export function betService():IBetService {
 		return api.post('/bet/new-bet', games);
 	}
 
-	return { getBetsData, postBetsData };
+	async function getFilteredBets(params: string[]): Promise<IAllBets[]>{
+		return api.get('/bet/all-bets', { params: params});
+	}
+
+	return { getBetsData, postBetsData, getFilteredBets };
 }

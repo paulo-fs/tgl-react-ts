@@ -1,7 +1,10 @@
 import axios, { AxiosError } from 'axios';
 
+let token:string;
 const tokenData = localStorage.getItem('@tgl-1.0:auth-data');
-const token = JSON.parse(tokenData!).token.token;
+tokenData
+	? token = JSON.parse(tokenData!).token.token
+	: '';
 
 const api = axios.create({
 	baseURL: 'http://localhost:3333',
