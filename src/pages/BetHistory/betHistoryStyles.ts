@@ -77,3 +77,17 @@ export const VerticalBar = styled.div<PropTypes>`
   border-radius: 1rem;
   background-color: ${props => props.color};
 `;
+
+export const EmptyBetList = styled.main`
+  padding: 6rem 0rem;
+  text-transform: uppercase;
+  h3{
+    font-weight: lighter;
+    font-size: 1.3rem;
+    font-style: normal;
+  }
+  h1{
+    font-size: 2.4rem;
+    color: ${props => props.theme.green2};
+  }
+`;
