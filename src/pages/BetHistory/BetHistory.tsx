@@ -13,8 +13,19 @@ import { HeaderHistory, HistoryItem, MainHistory, VerticalBar } from './betHisto
 export function BetHistory(){
 	const { getBetsData } = betService();
 	const dispatch = useAppDispatch();
-	const { savedBets } = useSelector((state: RootState) => state.betHistory);
+	const { savedBets, selectedGames } = useSelector((state: RootState) => state.betHistory);
 	const { games } = useSelector((state: RootState) => state.gamesInfo);
+
+	const filteredBets = savedBets.filter(bet => {
+		if(selectedGames.includes(bet.game_id)){
+			return bet;
+		}
+	});
+
+	const selectedBetList = filteredBets.length > 0
+		? filteredBets
+		: savedBets;
+
 
 	useEffect(() => {
 		const toastGetSavedBets = toast.loading('Carregando dados...');
@@ -47,16 +58,18 @@ export function BetHistory(){
 		<>
 			<HeaderHistory>
 				<div>
-					<h1>Apostas Recentes</h1>
+					<h1>Apostas Salvas</h1>
 					<nav>
 						<p>Filtrar</p>
 						{
 							games.map(bet => {
+								const isSelected = selectedGames.includes(bet.id);
 								return (
 									<BetButton
 										key={bet.id}
 										color={bet.color}
-										isSelected={false}
+										isSelected={isSelected}
+										onClick={() => dispatch(betHistoryActions.handleSelectedGames(bet.id))}
 									>
 										{bet.type}
 									</BetButton>
@@ -73,7 +86,7 @@ export function BetHistory(){
 
 			<MainHistory>
 				{
-					savedBets.map(bet => {
+					selectedBetList.map(bet => {
 						return (
 							<HistoryItem key={bet.id} color={bet.type.color}>
 								<VerticalBar color={bet.type.color}></VerticalBar>
