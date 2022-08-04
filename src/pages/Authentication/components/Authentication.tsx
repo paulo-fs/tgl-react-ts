@@ -78,7 +78,6 @@ export function Authentication(){
 						id="password"
 						placeholder="Senha"
 						ref={passInput}
-						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
 						value={formik.values.password}
 					/>

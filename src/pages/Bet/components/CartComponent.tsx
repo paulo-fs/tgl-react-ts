@@ -31,7 +31,7 @@ export function CartComponent(){
 
 	function saveCartHandler(){
 		const modalData = {
-			message: `Você está salvando um carrinho com ${betList!.length} apostas no valor de R$${cartTotalValue}. Você confirma esta ação?`,
+			message: `Você está salvando um carrinho com ${betList!.length} apostas no valor de R$${moneyValueConverter(cartTotalValue)}. Você confirma esta ação?`,
 			action: ModalActionOptions.SAVE_CART
 		};
 		if(cartTotalValue < minCartValue){
